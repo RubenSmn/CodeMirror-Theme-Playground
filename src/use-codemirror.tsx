@@ -6,8 +6,8 @@ import { defaultHighlightStyle, HighlightStyle } from '@codemirror/highlight';
 import { lineNumbers } from '@codemirror/gutter';
 import { javascript } from '@codemirror/lang-javascript';
 
-const lang = new Compartment;
-const theme = new Compartment;
+const lang = new Compartment();
+const theme = new Compartment();
 
 const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, EditorView?] => {
   const refContainer = useRef<T>(null);

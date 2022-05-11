@@ -1,100 +1,97 @@
 import { tags as t } from '@codemirror/highlight';
 
 export const tagTree = {
-  comments: {
-    root: 'comment',
-    children: ['lineComment', 'blockComment', 'docComment'],
+  'comment': {
+    'lineComment': {},
+    'blockComment': {},
+    'docComment': {},
   },
-  names: {
-    root: 'name',
-    children: [
-      'variableName',
-      {
-	root: 'typeName',
-	children: ['tagName'],
-      },
-      {
-	root: 'propertyName',
-	children: ['attributeName'],
-      },
-      'className',
-      'labelName',
-      'namespace',
-      'macroName',
-    ],
+  'name': {
+    'variableName': {},
+    'typeName': {
+      'tagName': {},
+    },
+    'propertyName': {
+      'attributeName': {},
+    },
+    'className': {},
+    'labelName': {},
+    'namespace': {},
+    'macroName': {},
   },
-  literals: {
-    root: 'literal',
-    children: [
-      {
-	root: 'string',
-	children: ['docString', 'character', 'attributeValue'],
-      },
-      {
-	root: 'number',
-	children: ['interger', 'float'],
-      },
-      'bool',
-      'regexp',
-      'escape',
-      'color',
-      'url',
-    ],
+  'literal': {
+    'string': {
+      'docString': {},
+      'character': {},
+      'attributeValue': {},
+    },
+    'number': {
+      'interger': {},
+      'float': {},
+    },
+    'bool': {},
+    'regexp': {},
+    'escape': {},
+    'color': {},
+    'url': {},
   },
-  keywords: {
-    root: 'keyword',
-    children: ['self', 'null', 'atom', 'unit', 'modifier', 'operatorKeyword', 'controlKeyword', 'definitionKeyword', 'moduleKeyword'],
+  'keyword': {
+    'self': {},
+    'null': {},
+    'atom': {},
+    'unit': {},
+    'modifier': {},
+    'operatorKeyword': {},
+    'controlKeyword': {},
+    'definitionKeyword': {},
+    'moduleKeyword': {},
   },
-  operators: {
-    root: 'operator',
-    children: ['derefOperator', 'arithmeticOperator', 'logicOperator', 'bitwiseOperator', 'compareOperator', 'updateOperator', 'definitionOperator', 'typeOperator', 'controlOperator'],
+  'operator': {
+    'derefOperator': {},
+    'arithmeticOperator': {},
+    'logicOperator': {},
+    'bitwiseOperator': {},
+    'compareOperator': {},
+    'updateOperator': {},
+    'definitionOperator': {},
+    'typeOperator': {},
+    'controlOperator': {},
   },
-  punctuations: {
-    root: 'punctuation',
-    children: [
-      'separator',
-      {
-	root: 'bracket',
-	children: ['angleBracket', 'squareBracket', 'paren', 'brace'],
-      },
-    ],
+  'punctuation': {
+    'separator': {},
+    'bracket': {
+      'angleBracket': {},
+      'squareBracket': {},
+      'paren': {},
+      'brace': {},
+    },
   },
-  contents: {
-    root: 'content',
-    children: [
-      {
-	root: 'heading',
-	children: ['heading1', 'heading2', 'heading3', 'heading4', 'heading5', 'heading6'],
-      },
-      'contentSeparator',
-      'list',
-      'quote',
-      'emphasis',
-      'strong',
-      'link',
-      'monospace',
-      'strikethrough',
-    ],
+  'content': {
+    'heading': {
+      'heading1': {},
+      'heading2': {},
+      'heading3': {},
+      'heading4': {},
+      'heading5': {},
+      'heading6': {},
+    },
+    'contentSeparator': {},
+    'list': {},
+    'quote': {},
+    'emphasis': {},
+    'strong': {},
+    'link': {},
+    'monospace': {},
+    'strikethrough': {},
   },
-  inserted: {
-    root: 'inserted',
-    children: [],
-  },
-  deleted: {
-    root: 'deleted',
-    children: [],
-  },
-  changed: {
-    root: 'changed',
-    children: [],
-  },
-  invalid: {
-    root: 'invalid',
-    children: [],
-  },
-  meta: {
-    root: 'meta',
-    children: ['documentMeta', 'annotation', 'processingInstruction'],
+  'inserted': {},
+  'deleted': {},
+  'changed': {},
+  'invalid': {},
+  'meta': {
+    'documentMeta': {},
+    'annotation': {},
+    'processingInstruction': {},
   },
 };
 

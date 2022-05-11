@@ -1,25 +1,24 @@
 import React from 'react';
 import OptionLeaf from './option-leaf';
-import type { Tag } from '@codemirror/highlight';
 
 interface Props {
   tree: { [index: string]: {} };
-  handleChange: (event: any, tag: Tag) => void;
 };
 
 const OptionTree: React.FC<Props> = (props) => {
-  const { tree, handleChange } = props;
+  const { tree } = props;
 
   const leafs = Object.keys(tree).map((leaf: string) => {
-    const hasChildren = Object.keys(tree[leaf]).length > 0;
+    const branch = tree[leaf];
+    const hasChildren = Object.keys(branch).length > 0;
 
     return hasChildren ? (
-      <OptionLeaf key={`otl-${leaf}`} leaf={leaf} handleChange={handleChange}>
-        <OptionTree tree={tree[leaf]} handleChange={handleChange} />
+      <OptionLeaf key={`otl-${leaf}`} leaf={leaf}>
+        <OptionTree tree={branch} />
       </OptionLeaf>
     ) : (
-      <OptionLeaf key={`otl-${leaf}`} leaf={leaf} handleChange={handleChange} />
-    )
+      <OptionLeaf key={`otl-${leaf}`} leaf={leaf} />
+    );
   });
 
   return (

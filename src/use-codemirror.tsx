@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { EditorView, keymap, highlightActiveLine, highlightSpecialChars } from '@codemirror/view';
-import { Compartment, EditorState, Extension } from '@codemirror/state';
+import { Compartment, EditorState } from '@codemirror/state';
 import { defaultKeymap } from '@codemirror/commands';
 import { defaultHighlightStyle, HighlightStyle } from '@codemirror/highlight';
 import { lineNumbers } from '@codemirror/gutter';

@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import {defaultHighlightStyle} from '@codemirror/highlight';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import ConfigTab from './config-tab';
+import Editor from './editor';
 
-function App() {
+const App: React.FC = () => {
+  const [editorTheme, setEditorTheme] = useState([]);
+
+  const handleThemeUpdate = (updatedValues: {}) => {
+    setEditorTheme((prevState): any => {
+      return [
+        ...prevState,
+	updatedValues,
+      ];
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1 className="app-header">CodeMirror Theme Playground</h1>
+      <div className='app-layout'>
+	<Editor editorTheme={editorTheme} />
+        <ConfigTab onChange={handleThemeUpdate} />
+      </div>
     </div>
   );
 }

@@ -1,3 +1,20 @@
+* {
+  box-sizing: border-box; 
+}
+
 .app-header {
   text-align: center;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+.app-configtab-tag label {
+  padding: .5em;
+}
+
+.app-configtab-tag input {
+  max-width: 100px;
 }

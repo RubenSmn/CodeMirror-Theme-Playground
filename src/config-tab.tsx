@@ -1,5 +1,7 @@
 import React from 'react';
 import { Tag, tags } from '@codemirror/highlight';
+import OptionTree from './components/option-tree';
+import { tagTree } from './constants';
 
 interface Props {
   onChange: (updatedValues: any) => void
@@ -16,23 +18,10 @@ const ConfigTab: React.FC<Props> = (props) => {
     onChange({ tag, color: newValue });
   };
 
-  const tagItems = Object.entries(tags).map((entry: any) => {
-    const [tagName, tag] = entry;
-    return (
-      <div className="app-configtab-tag" key={`act-${tagName}`}>
-	<label htmlFor={`configtab-tag-${tagName}`}>Color for: { tagName }</label>
-	<input
-	  id={`configtab-tag-${tagName}`}
-	  onChange={(e) => handleChange(e, tag)}
-	/>
-      </div>
-    )
-  });
-
   return (
     <div className="app-configtab">
       <h4>Config Tab</h4>
-      { tagItems }
+      <OptionTree tree={tagTree} handleChange={handleChange} />
     </div>
   );
 };

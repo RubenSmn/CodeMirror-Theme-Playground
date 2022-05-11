@@ -95,7 +95,7 @@ export const tagTree = {
   },
 };
 
-export const tagMap = {
+export const tagMap: { [index: string]: any } = {
   'comment': t.comment,
   'lineComment': t.lineComment,
   'blockComment': t.blockComment,

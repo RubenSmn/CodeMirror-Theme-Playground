@@ -8,7 +8,7 @@ const ConfigTab: React.FC = () => {
   };
 
   const tagItems = Object.keys(tags).map((tagName: string) => (
-    <div className="app-configtab-tag">
+    <div className="app-configtab-tag" key={`act-${tagName}`}>
       <label htmlFor={`configtab-tag-${tagName}`}>Color for: { tagName }</label>
       <input
 	id={`configtab-tag-${tagName}`}

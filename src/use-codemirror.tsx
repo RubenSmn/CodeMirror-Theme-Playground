@@ -3,7 +3,7 @@ import { EditorView, keymap, highlightActiveLine, highlightSpecialChars } from '
 import { EditorState } from '@codemirror/state';
 import { defaultKeymap } from '@codemirror/commands';
 import { defaultHighlightStyle } from '@codemirror/highlight';
-import {lineNumbers} from '@codemirror/gutter';
+import { lineNumbers } from '@codemirror/gutter';
 
 const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, EditorView?] => {
   const refContainer = useRef<T>(null);

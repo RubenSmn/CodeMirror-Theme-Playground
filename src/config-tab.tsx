@@ -1,21 +1,33 @@
 import React from 'react';
-import { tags } from '@codemirror/highlight';
+import { Tag, tags } from '@codemirror/highlight';
 
-const ConfigTab: React.FC = () => {
-  const handleChange = (tagName: string) => {
+interface Props {
+  onChange: (updatedValues: any) => void
+}
+const ConfigTab: React.FC<Props> = (props) => {
+  const { onChange } = props;
+  const colorRegex = /^#[a-fA-F0-9]{3,6}$/;
+
+  const handleChange = (event: any, tag: Tag) => {
     // update editor with new style
-    console.log(tagName);
+    // if value is a color
+    const newValue = event.target.value;
+    if (!colorRegex.test(newValue)) return;
+    onChange({ tag, color: newValue });
   };
 
-  const tagItems = Object.keys(tags).map((tagName: string) => (
-    <div className="app-configtab-tag" key={`act-${tagName}`}>
-      <label htmlFor={`configtab-tag-${tagName}`}>Color for: { tagName }</label>
-      <input
-	id={`configtab-tag-${tagName}`}
-        onChange={() => handleChange(tagName)}
-      />
-    </div>
-  ));
+  const tagItems = Object.entries(tags).map((entry: any) => {
+    const [tagName, tag] = entry;
+    return (
+      <div className="app-configtab-tag" key={`act-${tagName}`}>
+	<label htmlFor={`configtab-tag-${tagName}`}>Color for: { tagName }</label>
+	<input
+	  id={`configtab-tag-${tagName}`}
+	  onChange={(e) => handleChange(e, tag)}
+	/>
+      </div>
+    )
+  });
 
   return (
     <div className="app-configtab">

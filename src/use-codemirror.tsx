@@ -1,26 +1,31 @@
 import { useState, useEffect, useRef } from 'react';
 import { EditorView, keymap, highlightActiveLine, highlightSpecialChars } from '@codemirror/view';
-import { EditorState } from '@codemirror/state';
+import { Compartment, EditorState, Extension } from '@codemirror/state';
 import { defaultKeymap } from '@codemirror/commands';
-import { defaultHighlightStyle } from '@codemirror/highlight';
+import { defaultHighlightStyle, HighlightStyle } from '@codemirror/highlight';
 import { lineNumbers } from '@codemirror/gutter';
+import { javascript } from '@codemirror/lang-javascript';
+
+const lang = new Compartment;
+const theme = new Compartment;
 
 const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, EditorView?] => {
   const refContainer = useRef<T>(null);
   const [editorView, setEditorView] = useState<EditorView>();
 
   const standardState = EditorState.create({
-    doc: 'Super Gaef, Wenky Benky',
+    doc: 'const x = "wenky";',
     extensions: [
       keymap.of([...defaultKeymap]),
       lineNumbers(),
       highlightActiveLine(),
       highlightSpecialChars(),
-      defaultHighlightStyle.fallback,
+      lang.of(javascript()),
+      theme.of(defaultHighlightStyle.fallback),
       EditorView.lineWrapping,
     ],
   });
-
+  
   // to initialize the editor
   useEffect(() => {
     if (!refContainer.current) return;
@@ -33,6 +38,13 @@ const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, 
   }, [refContainer]);
 
   return [refContainer, editorView];
-}
+};
 
 export default useCodeMirror;
+
+export const setTheme = (view: EditorView, newTheme: any) => {
+  const test = HighlightStyle.define(newTheme);
+  view.dispatch({
+    effects: theme.reconfigure(test),
+  });
+};

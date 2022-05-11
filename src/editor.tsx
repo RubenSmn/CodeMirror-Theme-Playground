@@ -1,8 +1,18 @@
-import React from 'react';
-import useCodeMirror from './use-codemirror';
+import React, { useEffect } from 'react';
+import useCodeMirror, { setTheme } from './use-codemirror';
 
-const Editor: React.FC = () => {
+interface Props {
+  editorTheme: any,
+};
+
+const Editor: React.FC<Props> = (props) => {
+  const { editorTheme } = props;
   const [refContainer, editorView] = useCodeMirror<HTMLDivElement>();
+  
+  useEffect(() => {
+    if (!editorView || !editorTheme) return;
+    setTheme(editorView, editorTheme);
+  }, [editorTheme]);
 
   return (
     <div ref={refContainer}></div>

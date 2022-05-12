@@ -26,7 +26,7 @@ export const tagTree = {
       'attributeValue': {},
     },
     'number': {
-      'interger': {},
+      'integer': {},
       'float': {},
     },
     'bool': {},

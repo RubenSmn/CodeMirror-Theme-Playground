@@ -17,7 +17,6 @@ interface Props {
 
 const OptionTree: React.FC<Props> = (props) => {
   const { tree, isTrunk = true } = props;
-  console.log(isTrunk)
 
   const leafs = Object.keys(tree).map((leaf: string) => {
     const branch = tree[leaf];
@@ -38,8 +37,8 @@ const OptionTree: React.FC<Props> = (props) => {
 	{ Object.keys(tree).map((leaf: string) => <Tab key={`tlt-${leaf}`}>{ leaf }</Tab>) }
       </TabList>
       <TabPanels>
-	{ leafs.map((leaf: any) => (
-	  <TabPanel key={`tlt-${leaf}`} p={0}>
+	{ leafs.map((leaf: any, idx: number) => (
+	  <TabPanel key={`tlp-${idx}`} p={0}>
 	    <List>
 	      { leaf }
 	    </List>

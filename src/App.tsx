@@ -1,27 +1,24 @@
-import {defaultHighlightStyle} from '@codemirror/highlight';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import ConfigTab from './config-tab';
 import Editor from './editor';
+import Credit from './components/credit';
+import {
+  Center,
+  Heading,
+  HStack
+} from '@chakra-ui/react';
 
 const App: React.FC = () => {
-  const [editorTheme, setEditorTheme] = useState([]);
-
-  const handleThemeUpdate = (updatedValues: {}) => {
-    setEditorTheme((prevState): any => {
-      return [
-        ...prevState,
-	updatedValues,
-      ];
-    });
-  };
-
   return (
     <div className="app">
-      <h1 className="app-header">CodeMirror Theme Playground</h1>
+      <HStack my={3} justify='space-evenly'>
+        <Heading size='lg'>CodeMirror Theme Playground</Heading>
+        <Credit />
+      </HStack>
       <div className='app-layout'>
-	<Editor editorTheme={editorTheme} />
-        <ConfigTab onChange={handleThemeUpdate} />
+	<Editor />
+        <ConfigTab />
       </div>
     </div>
   );

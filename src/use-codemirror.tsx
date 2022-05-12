@@ -1,20 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import { EditorView, keymap, highlightActiveLine, highlightSpecialChars } from '@codemirror/view';
-import { Compartment, EditorState, Extension } from '@codemirror/state';
+import { Compartment, EditorState } from '@codemirror/state';
 import { defaultKeymap } from '@codemirror/commands';
 import { defaultHighlightStyle, HighlightStyle } from '@codemirror/highlight';
 import { lineNumbers } from '@codemirror/gutter';
 import { javascript } from '@codemirror/lang-javascript';
+import { docs } from './sample-docs';
 
-const lang = new Compartment;
-const theme = new Compartment;
+const lang = new Compartment();
+const theme = new Compartment();
 
 const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, EditorView?] => {
   const refContainer = useRef<T>(null);
   const [editorView, setEditorView] = useState<EditorView>();
 
   const standardState = EditorState.create({
-    doc: 'const x = "wenky";',
+    doc: docs['javascript-node'],
     extensions: [
       keymap.of([...defaultKeymap]),
       lineNumbers(),
@@ -23,6 +24,7 @@ const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, 
       lang.of(javascript()),
       theme.of(defaultHighlightStyle.fallback),
       EditorView.lineWrapping,
+      EditorView.editable.of(false),
     ],
   });
   

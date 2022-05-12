@@ -1,5 +1,4 @@
-import { Tag } from '@codemirror/highlight';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { tagMap } from '../constants';
 import { useEditorTheme } from './theme-provider';
 import {
@@ -16,13 +15,16 @@ interface Props {
 const OptionLeaf: React.FC<Props> = (props) => {
   const { leaf, children } = props;
   const tag = tagMap[leaf];
-  const [_, setEditorTheme] = useEditorTheme();
+  const [editorTheme, setEditorTheme] = useEditorTheme();
   const colorRegex = /^#[a-fA-F0-9]{3,6}$/;
+  const [colorInput, setColorInput] = useState('');
 
   const handleChange = (event: any) => {
     // update editor with new style
     // if value is a color
     const newValue = event.target.value;
+    setColorInput(newValue);
+
     if (!colorRegex.test(newValue)) return;
     setEditorTheme((prevState: any): any => {
       return {
@@ -32,13 +34,20 @@ const OptionLeaf: React.FC<Props> = (props) => {
     });
   };
 
+  useEffect(() => {
+    if (!editorTheme[leaf]) return;
+    setColorInput(editorTheme[leaf].color);
+  }, [editorTheme]);
+
   const InputComponent = (
     <>
       <Text align='start'>{ leaf }</Text>
       <Input
 	placeholder='#ff3'
 	variant='flushed'
+        borderColor={colorInput}
 	onChange={(e) => handleChange(e)}
+	value={colorInput}
       />
     </>
   );

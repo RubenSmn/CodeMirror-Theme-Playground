@@ -2,6 +2,11 @@ import { Tag } from '@codemirror/highlight';
 import React from 'react';
 import { tagMap } from '../constants';
 import { useEditorTheme } from './theme-provider';
+import {
+  Input,
+  Text,
+  ListItem,
+} from '@chakra-ui/react';
 
 interface Props {
   leaf: string;
@@ -27,15 +32,26 @@ const OptionLeaf: React.FC<Props> = (props) => {
     });
   };
 
-  return (
-    <div className="app-configtab-tag" key={`act-${leaf}`}>
-      <label htmlFor={`configtab-tag-${leaf}`}>Color for: { leaf }</label>
-      <input
-        id={`configtab-tag-${leaf}`}
-        onChange={(e) => handleChange(e, tag)}
+  const InputComponent = (
+    <>
+      <Text align='start'>{ leaf }</Text>
+      <Input
+	placeholder='#ff3'
+	variant='flushed'
+	onChange={(e) => handleChange(e, tag)}
       />
-      { children }
-    </div>
+    </>
+  );
+
+  return children ? (
+    <ListItem pl={2}>
+      { InputComponent }
+      { children } 
+    </ListItem>
+  ) : (
+    <ListItem pl={2}>
+      { InputComponent } 
+    </ListItem>
   );
 };
 

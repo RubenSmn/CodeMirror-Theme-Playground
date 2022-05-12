@@ -1,12 +1,23 @@
 import React from 'react';
 import OptionLeaf from './option-leaf';
+import {
+  List,
+  Tabs,
+  TabList,
+	TabPanels,
+	TabPanel,
+	Tab,
+	UnorderedList,
+} from '@chakra-ui/react';
 
 interface Props {
   tree: { [index: string]: {} };
+  isTrunk?: boolean;
 };
 
 const OptionTree: React.FC<Props> = (props) => {
-  const { tree } = props;
+  const { tree, isTrunk = true } = props;
+  console.log(isTrunk)
 
   const leafs = Object.keys(tree).map((leaf: string) => {
     const branch = tree[leaf];
@@ -14,17 +25,32 @@ const OptionTree: React.FC<Props> = (props) => {
 
     return hasChildren ? (
       <OptionLeaf key={`otl-${leaf}`} leaf={leaf}>
-        <OptionTree tree={branch} />
+        <OptionTree tree={branch} isTrunk={false} />
       </OptionLeaf>
     ) : (
       <OptionLeaf key={`otl-${leaf}`} leaf={leaf} />
     );
   });
 
-  return (
-    <div className="app-configtab-tree">
+  return isTrunk ? (
+    <Tabs orientation='vertical'>
+      <TabList>
+	{ Object.keys(tree).map((leaf: string) => <Tab key={`tlt-${leaf}`}>{ leaf }</Tab>) }
+      </TabList>
+      <TabPanels>
+	{ leafs.map((leaf: any) => (
+	  <TabPanel key={`tlt-${leaf}`} p={0}>
+	    <List>
+	      { leaf }
+	    </List>
+	  </TabPanel>
+	))}
+      </TabPanels>
+    </Tabs>
+  ) : (
+    <UnorderedList>
       { leafs }
-    </div>
+    </UnorderedList>
   );
 };
 

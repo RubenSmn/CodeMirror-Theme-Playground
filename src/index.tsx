@@ -3,13 +3,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { EditorThemeProvider } from './components/theme-provider';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <EditorThemeProvider>
-    <App />
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
   </EditorThemeProvider>
 );
 

@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
 import useCodeMirror, { setTheme } from './use-codemirror';
+import {
+  Box,
+  Heading,
+  Center,
+} from '@chakra-ui/react';
 
 interface Props {
   editorTheme: any,
@@ -15,7 +20,12 @@ const Editor: React.FC<Props> = (props) => {
   }, [editorTheme]);
 
   return (
-    <div ref={refContainer}></div>
+    <Box>
+      <Center>
+	<Heading size='md' my={2}>Editor</Heading>
+      </Center>
+      <div ref={refContainer}></div>
+    </Box>
   );
 };
 

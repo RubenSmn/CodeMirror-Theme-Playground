@@ -8,7 +8,7 @@ const EditorThemeContext = React.createContext<any>({});
 
 const EditorThemeProvider: React.FC<Props> = (props) => {
   const { children } = props;
-  const [editorTheme, setEditorTheme] = useState([]);
+  const [editorTheme, setEditorTheme] = useState({});
 
   return (
     <EditorThemeContext.Provider value={{ editorTheme, setEditorTheme }}>

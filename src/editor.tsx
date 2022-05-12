@@ -13,7 +13,8 @@ const Editor: React.FC = () => {
   
   useEffect(() => {
     if (!editorView || !editorTheme) return;
-    setTheme(editorView, editorTheme);
+    const theme = Object.values(editorTheme);
+    setTheme(editorView, theme);
   }, [editorTheme]);
 
   return (

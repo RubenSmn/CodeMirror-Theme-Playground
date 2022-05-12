@@ -19,16 +19,16 @@ const OptionLeaf: React.FC<Props> = (props) => {
   const [_, setEditorTheme] = useEditorTheme();
   const colorRegex = /^#[a-fA-F0-9]{3,6}$/;
 
-  const handleChange = (event: any, tag: Tag) => {
+  const handleChange = (event: any) => {
     // update editor with new style
     // if value is a color
     const newValue = event.target.value;
     if (!colorRegex.test(newValue)) return;
     setEditorTheme((prevState: any): any => {
-      return [
+      return {
         ...prevState,
-	{ tag, color: newValue },
-      ];
+	[leaf]: { tag, color: newValue },
+      };
     });
   };
 
@@ -38,7 +38,7 @@ const OptionLeaf: React.FC<Props> = (props) => {
       <Input
 	placeholder='#ff3'
 	variant='flushed'
-	onChange={(e) => handleChange(e, tag)}
+	onChange={(e) => handleChange(e)}
       />
     </>
   );

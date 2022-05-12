@@ -19,23 +19,25 @@ const ExportButton: React.FC = () => {
   const { hasCopied, onCopy } = useClipboard(value);
   const [editorTheme, _] = useEditorTheme();
 
-  const formatToJs = (toFormat: any, indent: number) => {
+  const formatThemeToJs= (toFormat: any, indent: number = 2) => {
     const prefix = new Array(indent + 1).join(' ');
-    const result = Object.entries(toFormat).map((tag: any) => {
-      const [name, value] = tag;
-      const values = Object.entries(value)
-      .filter((v: any) => v[0] !== 'tag')
-      .map((v: any) => {
-	return `${v[0]}: '${v[1]}'`;
-      }).join(',');
-      const res = `${prefix}{ t.${name}, ${values} }`;
-      return res;
+    const prep: { [color: string]: string[] } = Object.entries(toFormat).reduce((acc: any, t: [name: string, value: any]) => {
+      const [name, value] = t;
+      // if color does not exist add new array
+      if (!acc[value.color]) return { ...acc, [value.color]: [name]};
+      // if color exists add push name
+      return { ...acc, [value.color]: [...acc[value.color], name]};
+    }, {});
+    const result = Object.entries(prep).map((m: [color: string, tags: string[]]) => {
+      const [color, tags] = m;
+      const resTags = tags.map((t: string) => `t.${t}`)
+      return `${prefix}{ tag: [${resTags.join(', ')}], color: '${color}' }`;
     });
-    return `const customTheme = HighlightStyle.define([\n${result.join(', \n')}\n])`;
+    return `const customTheme = HighlightStyle.define([\n${result.join(', \n')}\n]);`;
   };
 
   useEffect(() => {
-    const theme = formatToJs(editorTheme, 2);
+    const theme = formatThemeToJs(editorTheme);
     const prefix = `import { tags as t, HighlightStyle } from '@codemirror/highlight';\n\n`;
     const test = prefix.concat(theme);
     setValue(test);

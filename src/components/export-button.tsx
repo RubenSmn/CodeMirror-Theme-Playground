@@ -19,26 +19,24 @@ const ExportButton: React.FC = () => {
   const { hasCopied, onCopy } = useClipboard(value);
   const [editorTheme, _] = useEditorTheme();
 
-  const getCircularReplacer = () => {
-    const seen = new WeakSet();
-    return (_: any, value: any) => {
-      if (typeof value === "object" && value !== null) {
-	if (seen.has(value)) {
-	  return;
-	}
-	seen.add(value);
-      }
-      return value;
-    };
-  };
-  
-  const formatToJs = (value: any) => {
-    return JSON.stringify(value, getCircularReplacer(), 2);
+  const formatToJs = (toFormat: any, indent: number) => {
+    const prefix = new Array(indent + 1).join(' ');
+    const result = Object.entries(toFormat).map((tag: any) => {
+      const [name, value] = tag;
+      const values = Object.entries(value)
+      .filter((v: any) => v[0] !== 'tag')
+      .map((v: any) => {
+	return `${v[0]}: '${v[1]}'`;
+      }).join(',');
+      const res = `${prefix}{ t.${name}, ${values} }`;
+      return res;
+    });
+    return `const customTheme = HighlightStyle.define([\n${result.join(', \n')}\n])`;
   };
 
   useEffect(() => {
-    const theme = formatToJs(editorTheme);
-    const prefix = `import { tags as t } from '@codemirror/highlight';\n\n`;
+    const theme = formatToJs(editorTheme, 2);
+    const prefix = `import { tags as t, HighlightStyle } from '@codemirror/highlight';\n\n`;
     const test = prefix.concat(theme);
     setValue(test);
   }, [editorTheme]);

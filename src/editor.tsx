@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react';
 import useCodeMirror, { setTheme } from './use-codemirror';
+import { useEditorTheme } from './components/theme-provider';
 import {
   Box,
   Heading,
   Center,
 } from '@chakra-ui/react';
 
-interface Props {
-  editorTheme: any,
-};
-
-const Editor: React.FC<Props> = (props) => {
-  const { editorTheme } = props;
+const Editor: React.FC = () => {
+  const [editorTheme, _] = useEditorTheme();
   const [refContainer, editorView] = useCodeMirror<HTMLDivElement>();
   
   useEffect(() => {

@@ -11,7 +11,7 @@ import {
   useDisclosure,
   useClipboard,
 } from '@chakra-ui/react';
-import { useEditorTheme } from './theme-provider';
+import { useEditorTheme } from './playground-provider';
 
 const ExportButton: React.FC = () => {
   const [value, setValue] = useState('Wenky')

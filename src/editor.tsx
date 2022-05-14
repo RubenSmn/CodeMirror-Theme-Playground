@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import useCodeMirror, { setTheme } from './use-codemirror';
-import { useEditorTheme } from './components/theme-provider';
+import { useEditorTheme } from './components/playground-provider';
 import {
   Box,
   Heading,
-  Center,
+  HStack,
 } from '@chakra-ui/react';
+import ChangeDocButton from './components/change-doc-button';
 
 const Editor: React.FC = () => {
   const [editorTheme, _] = useEditorTheme();
@@ -19,9 +20,10 @@ const Editor: React.FC = () => {
 
   return (
     <Box>
-      <Center>
-	<Heading size='md' my={2}>Editor</Heading>
-      </Center>
+      <HStack justify='space-between' my={2} px={3}>
+	<Heading size='md'>Editor</Heading>
+        <ChangeDocButton />
+      </HStack>
       <div ref={refContainer}></div>
     </Box>
   );

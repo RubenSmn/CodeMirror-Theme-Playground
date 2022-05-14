@@ -9,9 +9,10 @@ const PlaygroundContext = React.createContext<any>({});
 const PlaygroundProvider: React.FC<Props> = (props) => {
   const { children } = props;
   const [editorTheme, setEditorTheme] = useState({});
+  const [docPreset, setDocPreset] = useState('javascript');
 
   return (
-    <PlaygroundContext.Provider value={{ editorTheme, setEditorTheme }}>
+    <PlaygroundContext.Provider value={{ editorTheme, setEditorTheme, docPreset, setDocPreset }}>
       { children }
     </PlaygroundContext.Provider>
   );
@@ -22,4 +23,9 @@ const useEditorTheme = () => {
   return [editorTheme, setEditorTheme];
 };
 
-export { PlaygroundProvider, useEditorTheme };
+const useDocPreset = () => {
+  const { docPreset, setDocPreset } = React.useContext(PlaygroundContext);
+  return [ docPreset, setDocPreset ];
+}
+
+export { PlaygroundProvider, useEditorTheme, useDocPreset };

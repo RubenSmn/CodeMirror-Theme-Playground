@@ -45,8 +45,8 @@ const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, 
 export default useCodeMirror;
 
 export const setTheme = (view: EditorView, newTheme: any) => {
-  const test = HighlightStyle.define(newTheme);
+  const style = HighlightStyle.define(newTheme);
   view.dispatch({
-    effects: theme.reconfigure(test),
+    effects: theme.reconfigure(style),
   });
 };

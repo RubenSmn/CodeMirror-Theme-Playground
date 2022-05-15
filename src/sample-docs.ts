@@ -58,7 +58,7 @@ body {
 }`,
     lang: css(),
   },
-  'go': {
+  'php': {
     doc: `<?php
 class Car {
   function Car() {

@@ -1,4 +1,4 @@
-export const docs = {
+export const docs: { [index: string]: string } = {
   'javascript': `let meetups = [
   { name: 'JavaScript', isActive: true, members: 700 },
   { name: 'Angular', isActive: true, members: 900 },

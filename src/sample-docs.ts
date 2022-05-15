@@ -1,5 +1,15 @@
-export const docs: { [index: string]: string } = {
-  'javascript': `const btn = document.getElementById('btn');
+import { javascript } from "@codemirror/lang-javascript";
+import { java } from "@codemirror/lang-java";
+import { css } from "@codemirror/lang-css";
+import { cpp } from "@codemirror/lang-cpp";
+import { php } from "@codemirror/lang-php";
+import { python } from "@codemirror/lang-python";
+import { markdown } from "@codemirror/lang-markdown";
+import { LanguageSupport } from "@codemirror/language";
+
+export const docs: { [index: string]: { doc: string, lang: LanguageSupport } } = {
+  'javascript': {
+    doc: `const btn = document.getElementById('btn');
 let count = 0;
 function render() {
   btn.innerText = \`Count: \$\{count}\`;
@@ -12,7 +22,10 @@ btn.addEventListener('click', () => {
     render();
   }
 });`,
-  'c++': `#include <iostream>
+    lang: javascript(),
+  },
+  'c++': {
+    doc: `#include <iostream>
 #include <fstream>
 
 int main() {
@@ -26,7 +39,10 @@ int main() {
     prinf("%s", line.c_str());
   }
 }`,
-  'css': `html {
+    lang: cpp(),
+  },
+  'css': {
+    doc: `html {
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
 }
@@ -40,21 +56,26 @@ body {
 *:after: {
   box-sizing: border-box;
 }`,
-  'go': `struct config {
-  port int
+    lang: css(),
+  },
+  'go': {
+    doc: `<?php
+class Car {
+  function Car() {
+    $this->model = "Tesla";
+  }
 }
 
-func main() {
-  var cfg config
+// create an object
+$Lightning = new Car();
 
-  flag.IntVar(&cfg.port, "port", 4000)
-  flag.Parse()
-
-  // Start the web server.
-  addr := fmt.Printf(":%d", cfg.port)
-  log.Fatal(http.ListenAndServe(addr, nil))
-}`,
-  'java': `public class Main {
+// show object properties
+echo $Lightning->model;
+?>`,
+    lang: php(),
+  },
+  'java': {
+    doc: `public class Main {
   int num = 1;
   boolean bool = true;
   String foo = "bar";
@@ -68,7 +89,10 @@ func main() {
     printMessage();
   }
 }`,
-  'python': `import os
+    lang: java(),
+  },
+  'python': {
+    doc: `import os
 
 """A string"""
 
@@ -82,8 +106,10 @@ class Foo (object):
   @property
   def foo(self):
     retun 'bar'`,
-  'markdown': `
-An h1 header
+    lang: python(),
+  },
+  'markdown': {
+    doc: `An h1 header
 ============
 
 Paragraphs are separated by a blank line.
@@ -114,4 +140,6 @@ const hello = () => {
 };
 ~~~
 `,
+    lang: markdown(),
+  },
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import useCodeMirror, { setTheme } from './use-codemirror';
-import { useEditorTheme } from './components/playground-provider';
+import useCodeMirror, { setTheme, setDoc } from './use-codemirror';
+import { useDocPreset, useEditorTheme } from './components/playground-provider';
 import {
   Box,
   Heading,
@@ -9,7 +9,8 @@ import {
 import ChangeDocButton from './components/change-doc-button';
 
 const Editor: React.FC = () => {
-  const [editorTheme, _] = useEditorTheme();
+  const [editorTheme, setEditorTheme] = useEditorTheme();
+  const [docPreset, setDocPreset] = useDocPreset();
   const [refContainer, editorView] = useCodeMirror<HTMLDivElement>();
   
   useEffect(() => {
@@ -17,6 +18,11 @@ const Editor: React.FC = () => {
     const theme = Object.values(editorTheme);
     setTheme(editorView, theme);
   }, [editorTheme]);
+
+  useEffect(() => {
+    if (!editorView || !docPreset) return;
+    setDoc(editorView, docPreset);
+  }, [docPreset]);
 
   return (
     <Box>

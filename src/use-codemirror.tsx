@@ -15,7 +15,7 @@ const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, 
   const [editorView, setEditorView] = useState<EditorView>();
 
   const standardState = EditorState.create({
-    doc: docs['javascript-node'],
+    doc: docs['javascript'],
     extensions: [
       keymap.of([...defaultKeymap]),
       lineNumbers(),
@@ -48,5 +48,16 @@ export const setTheme = (view: EditorView, newTheme: any) => {
   const style = HighlightStyle.define(newTheme);
   view.dispatch({
     effects: theme.reconfigure(style),
+  });
+};
+
+export const setDoc = (view: EditorView, newDoc: string) => {
+  const doc = docs[newDoc];
+  view.dispatch({
+    changes: {
+      from: 0,
+      to: view.state.doc.length,
+      insert: doc,
+    },
   });
 };

@@ -1,21 +1,145 @@
-export const docs = {
-  'javascript': `let meetups = [
-  { name: 'JavaScript', isActive: true, members: 700 },
-  { name: 'Angular', isActive: true, members: 900 },
-  { name: 'Node', isActive: false, members: 600 },
-  { name: 'React', isActive: true, members: 500 },
-];
+import { javascript } from "@codemirror/lang-javascript";
+import { java } from "@codemirror/lang-java";
+import { css } from "@codemirror/lang-css";
+import { cpp } from "@codemirror/lang-cpp";
+import { php } from "@codemirror/lang-php";
+import { python } from "@codemirror/lang-python";
+import { markdown } from "@codemirror/lang-markdown";
+import { LanguageSupport } from "@codemirror/language";
 
-let sumFPChain = meetups.filter((m) => {
-    return m.isActive;
-  })
-  .map((m) => {
-    return m.members - (0.1 * m.members);
-  })
-  .reduce((acc, m) => {
-    return acc + m;
-  }, 0);
+export const docs: { [index: string]: { doc: string, lang: LanguageSupport } } = {
+  'javascript': {
+    doc: `const btn = document.getElementById('btn');
+let count = 0;
+function render() {
+  btn.innerText = \`Count: \$\{count}\`;
+}
 
-console.log(sumFPChain); // output will be 1890`,
-  'javascript-node': "!process.env.NODE_ENV ? (process.env.NODE_ENV = 'development') : null\n\nconst express = require('express'\nconst bodyParser = require('body-parser')\nconst movieroutes = require('./src/routes/movie.routes')\nconst authroutes = require('./src/routes/authentication.routes')\nconst logger = require('./src/config/config').logger\nconst pool = require('./src/config/database')\n\nconst app = express()\nconst port = process.env.PORT || 3000\n\napp.use(bodyParser.json())\n\napp.all('*', (req, res, next) => {\n  const method = req.method\n  logger.debug('Method: ', method)\n  next()\n})\n\napp.use('/api', authroutes)\napp.use('/api', movieroutes)\n\napp.all('*', (req, res, next) => {\n  res.status(404).json({\n    error: 'Endpoint does not exist!'\n  })\n})\n\napp.listen(port, () => {\n  logger.info(`Server listening at port ${port}`)\n  logger.info(`Server running in '${process.env.NODE_ENV}' mode`)\n})\n\nfunction gracefulShutdown() {\n  logger.info('Server shutting down')\n  pool.end(function (err) {\n    logger.info('Database pool connections closed')\n  })\n}\n\n// e.g. kill\nprocess.on('SIGTERM', gracefulShutdown)\n// e.g. Ctrl + C\nprocess.on('SIGINT', gracefulShutdown)\n\nmodule.exports = app\n",
+btn.addEventListener('click', () => {
+  // count from 1 to 10.
+  if (count < 10) {
+    count += 1;
+    render();
+  }
+});`,
+    lang: javascript(),
+  },
+  'c++': {
+    doc: `#include <iostream>
+#include <fstream>
+
+int main() {
+  string line;
+  ifstream file;
+
+  file.open("myfile.txt");
+  
+  // Read file line by line.
+  while(getline(myfile, line)) {
+    prinf("%s", line.c_str());
+  }
+}`,
+    lang: cpp(),
+  },
+  'css': {
+    doc: `html {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+*,
+*:before,
+*:after: {
+  box-sizing: border-box;
+}`,
+    lang: css(),
+  },
+  'go': {
+    doc: `<?php
+class Car {
+  function Car() {
+    $this->model = "Tesla";
+  }
+}
+
+// create an object
+$Lightning = new Car();
+
+// show object properties
+echo $Lightning->model;
+?>`,
+    lang: php(),
+  },
+  'java': {
+    doc: `public class Main {
+  int num = 1;
+  boolean bool = true;
+  String foo = "bar";
+
+  static void printMessage() {
+    System.out.println("Hello World!");
+  }
+
+  public static void main(String[] args) {
+    // Print message to stdout
+    printMessage();
+  }
+}`,
+    lang: java(),
+  },
+  'python': {
+    doc: `import os
+
+"""A string"""
+
+# A comment
+
+class Foo (object):
+  def __init__(self):
+    num = 42
+    print(num)
+
+  @property
+  def foo(self):
+    retun 'bar'`,
+    lang: python(),
+  },
+  'markdown': {
+    doc: `An h1 header
+============
+
+Paragraphs are separated by a blank line.
+
+2nd paragraph. *Italic*, **bold**, and \`monospace\`. Itemized lists look like:
+
+* this one
+* that one
+* the other one
+
+Note that --- not considering the asterisk --- the actual text content starts at 4-columns in.
+
+> Block quotes are written like so.
+
+An h2 header
+------------
+
+Here's a numbered list:
+1. first item
+2. second item
+3. third item
+
+Here is a [link](example.com)
+
+~~~js
+const hello = () => {
+  console.log('world');
+};
+~~~
+`,
+    lang: markdown(),
+  },
 };

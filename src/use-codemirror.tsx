@@ -4,7 +4,6 @@ import { Compartment, EditorState } from '@codemirror/state';
 import { defaultKeymap } from '@codemirror/commands';
 import { defaultHighlightStyle, HighlightStyle } from '@codemirror/highlight';
 import { lineNumbers } from '@codemirror/gutter';
-import { javascript } from '@codemirror/lang-javascript';
 import { docs } from './sample-docs';
 
 const lang = new Compartment();
@@ -15,13 +14,13 @@ const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, 
   const [editorView, setEditorView] = useState<EditorView>();
 
   const standardState = EditorState.create({
-    doc: docs['javascript-node'],
+    doc: docs['javascript'].doc,
     extensions: [
       keymap.of([...defaultKeymap]),
       lineNumbers(),
       highlightActiveLine(),
       highlightSpecialChars(),
-      lang.of(javascript()),
+      lang.of(docs['javascript'].lang),
       theme.of(defaultHighlightStyle.fallback),
       EditorView.lineWrapping,
       EditorView.editable.of(false),
@@ -45,8 +44,23 @@ const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, 
 export default useCodeMirror;
 
 export const setTheme = (view: EditorView, newTheme: any) => {
-  const test = HighlightStyle.define(newTheme);
+  const style = HighlightStyle.define(newTheme);
   view.dispatch({
-    effects: theme.reconfigure(test),
+    effects: theme.reconfigure(style),
+  });
+};
+
+export const setDoc = (view: EditorView, newDoc: string) => {
+  const preset = docs[newDoc];
+  view.dispatch({
+    changes: {
+      from: 0,
+      to: view.state.doc.length,
+      insert: preset.doc,
+    },
+  });
+
+  view.dispatch({
+    effects: lang.reconfigure(preset.lang),
   });
 };

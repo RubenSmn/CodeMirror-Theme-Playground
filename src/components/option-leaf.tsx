@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { tagMap } from '../constants';
-import { useEditorTheme } from './theme-provider';
+import { useEditorTheme } from './playground-provider';
 import {
   Input,
   Text,

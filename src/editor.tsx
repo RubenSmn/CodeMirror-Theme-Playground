@@ -16,6 +16,7 @@ const Editor: React.FC = () => {
   
   useEffect(() => {
     if (!editorView || !syntaxTheme) return;
+    console.log(syntaxTheme)
     const theme = Object.values(syntaxTheme);
     setSyntax(editorView, theme);
   }, [syntaxTheme]);
@@ -29,6 +30,13 @@ const Editor: React.FC = () => {
     if (!editorView || !docPreset) return;
     setDoc(editorView, docPreset);
   }, [docPreset]);
+
+  useEffect(() => {
+    if (!editorView || !editorTheme || !syntaxTheme) return;
+    setTheme(editorView, editorTheme);
+    const theme = Object.values(syntaxTheme);
+    setSyntax(editorView, theme);
+  }, [editorView]);
 
   return (
     <Box>

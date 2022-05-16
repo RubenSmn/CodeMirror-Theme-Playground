@@ -4,7 +4,7 @@ import { useDocPreset } from './playground-provider';
 import { docs as presetDocs } from '../sample-docs';
 
 const ChangeDocButton: React.FC = () => {
-  const [docPreset, setDocPreset] = useDocPreset();
+  const { docPreset, setDocPreset } = useDocPreset();
   const docs = Object.keys(presetDocs);
 
   const handleChange = (e: any) => {

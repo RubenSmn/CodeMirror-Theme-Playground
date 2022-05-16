@@ -11,11 +11,6 @@
   grid-template-columns: 60% 40%;
 }
 
-.app-configtab {
-  height: 80vh;
-  overflow-y: scroll;
-}
-
 .app-configtab-tree {
   padding-left: 1em;
 }

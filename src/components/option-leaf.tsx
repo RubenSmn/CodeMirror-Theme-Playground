@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { tagMap } from '../constants';
-import { useEditorTheme } from './playground-provider';
+import { useSyntaxTheme } from './playground-provider';
 import {
   Input,
   Text,
@@ -15,7 +15,7 @@ interface Props {
 const OptionLeaf: React.FC<Props> = (props) => {
   const { leaf, children } = props;
   const tag = tagMap[leaf];
-  const [editorTheme, setEditorTheme] = useEditorTheme();
+  const { syntaxTheme, setSyntaxTheme } = useSyntaxTheme();
   const colorRegex = /^#[a-fA-F0-9]{3,6}$/;
   const [colorInput, setColorInput] = useState('');
 
@@ -26,7 +26,7 @@ const OptionLeaf: React.FC<Props> = (props) => {
     setColorInput(newValue);
 
     if (!colorRegex.test(newValue)) return;
-    setEditorTheme((prevState: any): any => {
+    setSyntaxTheme((prevState: any): any => {
       return {
         ...prevState,
 	[leaf]: { tag, color: newValue },
@@ -35,9 +35,9 @@ const OptionLeaf: React.FC<Props> = (props) => {
   };
 
   useEffect(() => {
-    if (!editorTheme[leaf]) return;
-    setColorInput(editorTheme[leaf].color);
-  }, [editorTheme]);
+    if (!syntaxTheme[leaf]) return;
+    setColorInput(syntaxTheme[leaf].color);
+  }, [syntaxTheme]);
 
   const InputComponent = (
     <>

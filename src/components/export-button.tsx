@@ -11,13 +11,13 @@ import {
   useDisclosure,
   useClipboard,
 } from '@chakra-ui/react';
-import { useEditorTheme } from './playground-provider';
+import { useSyntaxTheme } from './playground-provider';
 
 const ExportButton: React.FC = () => {
   const [value, setValue] = useState('Wenky')
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { hasCopied, onCopy } = useClipboard(value);
-  const [editorTheme, _] = useEditorTheme();
+  const { syntaxTheme } = useSyntaxTheme();
 
   const formatThemeToJs= (toFormat: any, indent: number = 2) => {
     const prefix = new Array(indent + 1).join(' ');
@@ -37,11 +37,11 @@ const ExportButton: React.FC = () => {
   };
 
   useEffect(() => {
-    const theme = formatThemeToJs(editorTheme);
+    const theme = formatThemeToJs(syntaxTheme);
     const prefix = `import { tags as t, HighlightStyle } from '@codemirror/highlight';\n\n`;
     const test = prefix.concat(theme);
     setValue(test);
-  }, [editorTheme]);
+  }, [syntaxTheme]);
 
   return (
     <>

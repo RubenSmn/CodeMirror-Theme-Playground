@@ -11,15 +11,17 @@ import {
   useDisclosure,
   useClipboard,
 } from '@chakra-ui/react';
-import { useSyntaxTheme } from './playground-provider';
+import { useEditorTheme, useSyntaxTheme } from './playground-provider';
 
 const ExportButton: React.FC = () => {
   const [value, setValue] = useState('Wenky')
+  const [themeValue, setThemeValue] = useState('No editor customization done');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { hasCopied, onCopy } = useClipboard(value);
+  const { hasCopied, onCopy } = useClipboard(themeValue);
   const { syntaxTheme } = useSyntaxTheme();
+  const { editorTheme } = useEditorTheme();
 
-  const formatThemeToJs= (toFormat: any, indent: number = 2) => {
+  const formatSyntaxToJs= (toFormat: any, indent: number = 2) => {
     const prefix = new Array(indent + 1).join(' ');
     const prep: { [color: string]: string[] } = Object.entries(toFormat).reduce((acc: any, t: [name: string, value: any]) => {
       const [name, value] = t;
@@ -33,15 +35,40 @@ const ExportButton: React.FC = () => {
       const resTags = tags.map((t: string) => `t.${t}`)
       return `${prefix}{ tag: [${resTags.join(', ')}], color: '${color}' }`;
     });
-    return `const customTheme = HighlightStyle.define([\n${result.join(', \n')}\n]);`;
+    return `const customSyntax = HighlightStyle.define([\n${result.join(', \n')}\n]);`;
+  };
+ 
+  const formatThemeToJs = (toFormat: any, indent: number = 2) => {
+    const prefix = new Array(indent + 1).join(' ');
+    const result = Object.entries(toFormat).map((style: [name: string, value: any]) => {
+      const [name, value] = style;
+      const props = Object.entries(value).map((prop: any) => {
+	const [propName, propValue] = prop;
+	if (!propValue) return;
+        return `${propName}: '${propValue}'`;
+      });
+      if (!props[0]) return;
+      return `${prefix}'${name}': { ${props.join(', ')} }`;
+    });
+    if (!result[0]) return;
+    return result.join(', \n');
   };
 
   useEffect(() => {
-    const theme = formatThemeToJs(syntaxTheme);
+    const syntax = formatSyntaxToJs(syntaxTheme);
     const prefix = `import { tags as t, HighlightStyle } from '@codemirror/highlight';\n\n`;
-    const test = prefix.concat(theme);
-    setValue(test);
+    const result = prefix.concat(syntax);
+    setValue(result);
   }, [syntaxTheme]);
+
+  useEffect(() => {
+    const theme = formatThemeToJs(editorTheme);
+    if (!theme) return;
+    const prefix = `import { EditorView } from '@codemirror/view';\n\n`;
+    const suffix = `const customTheme = EditorView.theme({\n${theme}\n});`;
+    const result = prefix.concat(suffix);
+    setThemeValue(result);
+  }, [editorTheme]);
 
   return (
     <>
@@ -65,7 +92,7 @@ const ExportButton: React.FC = () => {
 	      { hasCopied ? 'Copied' : 'Copy to clipboard'}
 	    </Button>
        	    <Textarea
-	      value={value}
+	      value={themeValue ?? 'No editor customization done'}
     	      onChange={(e) => setValue(e.target.value)}
 	      m={2}
 	      minH='50vh'

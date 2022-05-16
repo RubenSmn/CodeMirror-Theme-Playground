@@ -10,14 +10,20 @@ import {
   Textarea,
   useDisclosure,
   useClipboard,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
 } from '@chakra-ui/react';
 import { useEditorTheme, useSyntaxTheme } from './playground-provider';
 
 const ExportButton: React.FC = () => {
-  const [value, setValue] = useState('Wenky')
-  const [themeValue, setThemeValue] = useState('No editor customization done');
+  const [syntaxValue, setSyntaxValue] = useState('')
+  const [themeValue, setThemeValue] = useState('');
+  const [clipboardValue, setClipboardValue] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { hasCopied, onCopy } = useClipboard(themeValue);
+  const { hasCopied, onCopy } = useClipboard(clipboardValue);
   const { syntaxTheme } = useSyntaxTheme();
   const { editorTheme } = useEditorTheme();
 
@@ -54,16 +60,21 @@ const ExportButton: React.FC = () => {
     return result.join(', \n');
   };
 
+  const handleOpen = () => {
+    onOpen();
+    setClipboardValue(syntaxValue);
+  };
+
   useEffect(() => {
     const syntax = formatSyntaxToJs(syntaxTheme);
     const prefix = `import { tags as t, HighlightStyle } from '@codemirror/highlight';\n\n`;
     const result = prefix.concat(syntax);
-    setValue(result);
+    setSyntaxValue(result);
   }, [syntaxTheme]);
 
   useEffect(() => {
     const theme = formatThemeToJs(editorTheme);
-    if (!theme) return;
+    if (!theme) return setThemeValue('');
     const prefix = `import { EditorView } from '@codemirror/view';\n\n`;
     const suffix = `const customTheme = EditorView.theme({\n${theme}\n});`;
     const result = prefix.concat(suffix);
@@ -76,7 +87,7 @@ const ExportButton: React.FC = () => {
 	colorScheme='yellow'
 	variant='outline'
 	size='sm'
-        onClick={onOpen}
+        onClick={handleOpen}
       >Export</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size='xl'>
@@ -91,12 +102,30 @@ const ExportButton: React.FC = () => {
 	    >
 	      { hasCopied ? 'Copied' : 'Copy to clipboard'}
 	    </Button>
-       	    <Textarea
-	      value={themeValue ?? 'No editor customization done'}
-    	      onChange={(e) => setValue(e.target.value)}
-	      m={2}
-	      minH='50vh'
-	    />
+     	    <Tabs>
+    	      <TabList>
+		<Tab onClick={() => setClipboardValue(syntaxValue)}>Syntax</Tab>
+		<Tab onClick={() => setClipboardValue(themeValue)}>Editor</Tab>
+	      </TabList>
+	      <TabPanels>
+		<TabPanel>
+		  <Textarea
+		    value={!syntaxValue ? 'No syntax customization yet' : syntaxValue}
+		    onChange={(e) => setSyntaxValue(e.target.value)}
+		    m={2}
+		    minH='50vh'
+		  />
+		</TabPanel>
+		<TabPanel>
+		  <Textarea
+		    value={!themeValue ? 'No editor customization yet' : themeValue}
+		    onChange={(e) => setThemeValue(e.target.value)}
+		    m={2}
+		    minH='50vh'
+		  />
+		</TabPanel>
+	      </TabPanels>
+	    </Tabs>
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -31,6 +31,8 @@ const ExportButton: React.FC = () => {
     const prefix = new Array(indent + 1).join(' ');
     const prep: { [color: string]: string[] } = Object.entries(toFormat).reduce((acc: any, t: [name: string, value: any]) => {
       const [name, value] = t;
+      // if the value has no color 'continue'
+      if (!value.color) return acc;
       // if color does not exist add new array
       if (!acc[value.color]) return { ...acc, [value.color]: [name]};
       // if color exists add push name
@@ -38,10 +40,12 @@ const ExportButton: React.FC = () => {
     }, {});
     const result = Object.entries(prep).map((m: [color: string, tags: string[]]) => {
       const [color, tags] = m;
+      if(!color) return;
       const resTags = tags.map((t: string) => `t.${t}`)
       return `${prefix}{ tag: [${resTags.join(', ')}], color: '${color}' }`;
     });
-    return `const customSyntax = HighlightStyle.define([\n${result.join(', \n')}\n]);`;
+    if (!result[0]) return;
+    return result.join(', \n');
   };
  
   const formatThemeToJs = (toFormat: any, indent: number = 2) => {
@@ -67,8 +71,10 @@ const ExportButton: React.FC = () => {
 
   useEffect(() => {
     const syntax = formatSyntaxToJs(syntaxTheme);
+    if (!syntax) return setSyntaxValue('');
     const prefix = `import { tags as t, HighlightStyle } from '@codemirror/highlight';\n\n`;
-    const result = prefix.concat(syntax);
+    const suffix = `const customSyntax = HighlightStyle.define([\n${syntax}\n]);`;
+    const result = prefix.concat(suffix);
     setSyntaxValue(result);
   }, [syntaxTheme]);
 

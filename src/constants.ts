@@ -244,17 +244,17 @@ export const editorMap: { [index: string]: {
 };
 
 export const standardEditorTheme = {
-  '&': { color: '#624237', backgroundColor: '#D7CAB2' },
+  '&': { 'color': '#624237', 'backgroundColor': '#D7CAB2' },
   '.cm-content': { caretColor: '#fff6ef' },
   '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection': { backgroundColor: '#EEEEEE' },
   '.cm-panels': { backgroundColor: '#D7CAB2', color: '#879900' },
-  '.cm-panels.cm-panels-top': { borderBottom: '2px solid black' },
-  '.cm-panels.cm-panels-bottom': { borderTop: '2px solid black' },
+  '.cm-panels.cm-panels-top': { borderBottom: 'black' },
+  '.cm-panels.cm-panels-bottom': { borderTop: 'black' },
   '.cm-searchMatch': { backgroundColor: '#72a1ff59', outline: '1px solid #457dff' },
   '.cm-searchMatch.cm-searchMatch-selected': { backgroundColor: '#6199ff2f' },
   '.cm-activeLine': { backgroundColor: '#C8B593' },
   '.cm-selectionMatch': { backgroundColor: '#aafe661a' },
-  '.cm-gutters': { backgroundColor: '#D7CAB2', color: '#000000', border: 'none' },
+  '.cm-gutters': { backgroundColor: '#D7CAB2', color: '#000000', border: '' },
   '.cm-activeLineGutter': { backgroundColor: '#C8B593' },
 };
 

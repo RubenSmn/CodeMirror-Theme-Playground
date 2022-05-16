@@ -7,14 +7,13 @@ import {
 import { useEditorTheme } from './playground-provider';
 
 interface Props {
-  optionName: string;
   identifier: string;
   prop: string;
   callback: (prop: string, value: string) => void;
 };
 
 const ThemeOptionProp: React.FC<Props> = (componentProps) => {
-  const { optionName, identifier, prop, callback } = componentProps;
+  const { identifier, prop, callback } = componentProps;
   const [colorInput, setColorInput] = useState('');
   const { editorTheme } = useEditorTheme();
   const colorRegex = /^#(?:[a-fA-F0-9]{3}|[a-fA-F0-9]{6}$)|^$/;
@@ -28,8 +27,8 @@ const ThemeOptionProp: React.FC<Props> = (componentProps) => {
   }
 
   useEffect(() => {
-    if (!editorTheme[optionName]) return;
-    setColorInput(editorTheme[identifier][prop].color);
+    if (!editorTheme[identifier][prop]) return;
+    setColorInput(editorTheme[identifier][prop]);
   }, [editorTheme]);
 
   return (

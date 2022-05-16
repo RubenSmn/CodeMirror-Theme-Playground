@@ -17,12 +17,12 @@ const ThemeOptionProp: React.FC<Props> = (componentProps) => {
   const { optionName, identifier, prop, callback } = componentProps;
   const [colorInput, setColorInput] = useState('');
   const { editorTheme } = useEditorTheme();
-  const colorRegex = /^#[a-fA-F0-9]{3,6}$/;
+  const colorRegex = /^#(?:[a-fA-F0-9]{3}|[a-fA-F0-9]{6}$)|^$/;
 
   const handleChange = (e: any) => {
     const value = e.target.value;
     setColorInput(value);
-
+    
     if (!colorRegex.test(value)) return;
     callback(prop, value);
   }

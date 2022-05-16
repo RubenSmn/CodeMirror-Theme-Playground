@@ -16,7 +16,7 @@ const OptionLeaf: React.FC<Props> = (props) => {
   const { leaf, children } = props;
   const tag = tagMap[leaf];
   const { syntaxTheme, setSyntaxTheme } = useSyntaxTheme();
-  const colorRegex = /^#[a-fA-F0-9]{3,6}$/;
+  const colorRegex = /^#(?:[a-fA-F0-9]{3}|[a-fA-F0-9]{6}$)|^$/;
   const [colorInput, setColorInput] = useState('');
 
   const handleChange = (event: any) => {

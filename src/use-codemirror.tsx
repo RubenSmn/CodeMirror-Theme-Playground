@@ -22,10 +22,9 @@ const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, 
       highlightActiveLine(),
       highlightSpecialChars(),
       lang.of(docs['javascript'].lang),
-      syntax.of(defaultHighlightStyle.fallback),
+      syntax.of([]),
       theme.of([]),
       EditorView.lineWrapping,
-      EditorView.editable.of(false),
     ],
   });
   

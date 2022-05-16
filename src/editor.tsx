@@ -30,6 +30,13 @@ const Editor: React.FC = () => {
     setDoc(editorView, docPreset);
   }, [docPreset]);
 
+  useEffect(() => {
+    if (!editorView || !editorTheme || !syntaxTheme) return;
+    setTheme(editorView, editorTheme);
+    const theme = Object.values(syntaxTheme);
+    setSyntax(editorView, theme);
+  }, [editorView]);
+
   return (
     <Box>
       <HStack justify='space-between' my={2} px={3}>

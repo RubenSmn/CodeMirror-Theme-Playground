@@ -35,7 +35,6 @@ const ThemeOption: React.FC<Props> = ({ optionName }) => {
   const inputItems = props.map((prop: string, idx: number) => (
     <ThemeOptionProp
       key={`toi-${idx}`}
-      optionName={optionName}
       identifier={identifier}
       prop={prop}
       callback={handleChange}

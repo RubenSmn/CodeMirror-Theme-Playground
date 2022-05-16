@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { standardEditorTheme, standardSyntaxTheme } from '../constants';
 
 interface Props {
   children: React.ReactNode;
@@ -8,8 +9,8 @@ const PlaygroundContext = React.createContext<any>({});
 
 const PlaygroundProvider: React.FC<Props> = (props) => {
   const { children } = props;
-  const [syntaxTheme, setSyntaxTheme] = useState({});
-  const [editorTheme, setEditorTheme] = useState({});
+  const [syntaxTheme, setSyntaxTheme] = useState(standardSyntaxTheme);
+  const [editorTheme, setEditorTheme] = useState(standardEditorTheme);
   const [docPreset, setDocPreset] = useState('javascript');
 
   return (

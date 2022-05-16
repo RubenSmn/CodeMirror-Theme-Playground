@@ -7,6 +7,7 @@ import { lineNumbers } from '@codemirror/gutter';
 import { docs } from './sample-docs';
 
 const lang = new Compartment();
+const syntax = new Compartment();
 const theme = new Compartment();
 
 const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, EditorView?] => {
@@ -21,7 +22,8 @@ const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, 
       highlightActiveLine(),
       highlightSpecialChars(),
       lang.of(docs['javascript'].lang),
-      theme.of(defaultHighlightStyle.fallback),
+      syntax.of(defaultHighlightStyle.fallback),
+      theme.of([]),
       EditorView.lineWrapping,
       EditorView.editable.of(false),
     ],
@@ -43,8 +45,15 @@ const useCodeMirror = <T extends Element>(): [React.MutableRefObject<T | null>, 
 
 export default useCodeMirror;
 
+export const setSyntax = (view: EditorView, newSyntax: any) => {
+  const style = HighlightStyle.define(newSyntax);
+  view.dispatch({
+    effects: syntax.reconfigure(style),
+  });
+};
+
 export const setTheme = (view: EditorView, newTheme: any) => {
-  const style = HighlightStyle.define(newTheme);
+  const style = EditorView.theme(newTheme);
   view.dispatch({
     effects: theme.reconfigure(style),
   });

@@ -175,3 +175,70 @@ export const tagMap: { [index: string]: any } = {
   'annotation': t.annotation,
   'processingInstruction': t.processingInstruction,
 };
+
+export const editorMap: { [index: string]: {
+  identifier: string,
+  description: string,
+  props: string[],
+}} = {
+  'editor': {
+    identifier: '&',
+    description: 'the editor',
+    props: ['backgroundColor', 'color'],
+  },
+  'cursor': {
+    identifier: '.cm-content',
+    description: 'the cursor',
+    props: ['caretColor'],
+  },
+  'gutters': {
+    identifier: '.cm-gutters',
+    description: 'line number bar',
+    props: ['backgroundColor', 'color', 'border'],
+  },
+  'selection': {
+    identifier: '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection',
+    description: 'current selection',
+    props: ['backgroundColor', 'color'],
+  },
+  'active line': {
+    identifier: '.cm-activeLine',
+    description: 'line the cursor is on',
+    props: ['backgroundColor', 'color'],
+  },
+  'active line gutter': {
+    identifier: '.cm-selectionMatch',
+    description: 'gutter on the active line',
+    props: ['backgroundColor'],
+  },
+  'panels': {
+    identifier: '.cm-panels',
+    description: 'the panels at the top/bottom of the editor',
+    props: ['backgroundColor', 'color'],
+  },
+  'panels top': {
+    identifier: '.cm-panels.cm-panels-top',
+    description: 'panels at the top of the editor',
+    props: ['backgroundColor', 'borderTop'],
+  },
+  'panels bottom': {
+    identifier: '.cm-panels.cm-panels-bottom',
+    description: 'panels at the bottom of the editor',
+    props: ['backgroundColor', 'borderBottom'],
+  },
+  'search match': {
+    identifier: '.cm-searchMatch',
+    description: 'color of the matches found',
+    props: ['backgroundColor', 'outline'],
+  },
+  'search match selected': {
+    identifier: '.cm-searchMatch.cm-searchMatch-selected',
+    description: 'color the selected search match',
+    props: ['backgroundColor'],
+  },
+  'selection match': {
+    identifier: '.cm-selectionMatch',
+    description: 'other matches of the selected text',
+    props: ['backgroundColor', 'color'],
+  },
+};

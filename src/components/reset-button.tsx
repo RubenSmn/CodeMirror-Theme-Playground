@@ -20,7 +20,7 @@ const ResetButton: React.FC = () => {
       variant='ghost'
       size='sm'
       onClick={handleClick}
-    >Reset</Button>
+    >Reset all</Button>
   )
 };
 

@@ -52,15 +52,15 @@ const ExportButton: React.FC = () => {
     const prefix = new Array(indent + 1).join(' ');
     const result = Object.entries(toFormat).map((style: [name: string, value: any]) => {
       const [name, value] = style;
-      const props = Object.entries(value).map((prop: any) => {
+      const prep = Object.entries(value).filter((prop: any) => prop[1]);
+      const props = prep.map((prop: any) => {
 	const [propName, propValue] = prop;
-	if (!propValue) return;
+	if (!propName || !propValue) return;
         return `${propName}: '${propValue}'`;
       });
-      if (!props[0]) return;
+      if (!props.length) return;
       return `${prefix}'${name}': { ${props.join(', ')} }`;
-    });
-    if (!result[0]) return;
+    }).filter((style: any) => style);
     return result.join(', \n');
   };
 
@@ -96,7 +96,7 @@ const ExportButton: React.FC = () => {
         onClick={handleOpen}
       >Export</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} size='xl'>
+      <Modal isOpen={isOpen} onClose={onClose} size='2xl'>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Export your Theme</ModalHeader>

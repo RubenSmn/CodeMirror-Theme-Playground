@@ -3,7 +3,10 @@ import {
   Text,
   Input,
   Box,
+  InputGroup,
+  InputRightElement,
 } from '@chakra-ui/react';
+import ColorIndicator from './color-indicator';
 import { useEditorTheme } from './playground-provider';
 
 interface Props {
@@ -35,13 +38,15 @@ const ThemeOptionProp: React.FC<Props> = (componentProps) => {
   return (
     <Box>
       <Text align='start'>{ prop }</Text>
-      <Input
-	placeholder='#ff3'
-	variant='flushed'
-	onChange={handleChange}
-	borderColor={colorInput}
-	value={colorInput}
-      />
+      <InputGroup>
+	<Input
+	  placeholder='#ff3'
+	  variant='flushed'
+	  onChange={handleChange}
+	  value={colorInput}
+	/>
+        <InputRightElement children={<ColorIndicator color={colorInput} />}/>
+      </InputGroup>
     </Box>
   )
 };

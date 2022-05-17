@@ -5,7 +5,10 @@ import {
   Input,
   Text,
   ListItem,
+  InputGroup,
+  InputRightElement,
 } from '@chakra-ui/react';
+import ColorIndicator from './color-indicator';
 
 interface Props {
   leaf: string;
@@ -42,13 +45,15 @@ const OptionLeaf: React.FC<Props> = (props) => {
   const InputComponent = (
     <>
       <Text align='start'>{ leaf }</Text>
-      <Input
-	placeholder='#ff3'
-	variant='flushed'
-        borderColor={colorInput}
-	onChange={(e) => handleChange(e)}
-	value={colorInput}
-      />
+      <InputGroup>
+	<Input
+	  placeholder='#ff3'
+	  variant='flushed'
+	  onChange={(e) => handleChange(e)}
+	  value={colorInput}
+	/>
+        <InputRightElement children={<ColorIndicator color={colorInput} />} />
+      </InputGroup>
     </>
   );
 

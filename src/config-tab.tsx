@@ -20,7 +20,7 @@ const ConfigTab: React.FC = () => {
     <Box className="app-configtab" minW='360px'>
       <HStack justify='space-between' p={2}>
 	<Heading size='md' my={2}>Color Config</Heading>
-        <Box>
+        <Box pr={1}>
 	  <ResetButton />
 	  <ExportButton />
 	</Box>

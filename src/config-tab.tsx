@@ -13,13 +13,17 @@ import {
   Tab,
 } from '@chakra-ui/react';
 import ExportButton from './components/export-button';
+import ResetButton from './components/reset-button';
 
 const ConfigTab: React.FC = () => {
   return (
     <Box className="app-configtab" minW='360px'>
       <HStack justify='space-between' p={2}>
 	<Heading size='md' my={2}>Color Config</Heading>
-	<ExportButton />
+        <Box>
+	  <ResetButton />
+	  <ExportButton />
+	</Box>
       </HStack>
       <Tabs>
         <TabList>

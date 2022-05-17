@@ -27,6 +27,7 @@ const ThemeOptionProp: React.FC<Props> = (componentProps) => {
   }
 
   useEffect(() => {
+    if (!editorTheme[identifier]) { setColorInput(''); return; }
     if (!editorTheme[identifier][prop]) return;
     setColorInput(editorTheme[identifier][prop]);
   }, [editorTheme]);

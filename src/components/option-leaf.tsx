@@ -35,7 +35,7 @@ const OptionLeaf: React.FC<Props> = (props) => {
   };
 
   useEffect(() => {
-    if (!syntaxTheme[leaf]) return;
+    if (!syntaxTheme[leaf]) { setColorInput(''); return; };
     setColorInput(syntaxTheme[leaf].color);
   }, [syntaxTheme]);
 

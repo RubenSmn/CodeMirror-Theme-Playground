@@ -54,13 +54,11 @@ const ExportButton: React.FC = () => {
       const [name, value] = style;
       const props = Object.entries(value).map((prop: any) => {
 	const [propName, propValue] = prop;
-	if (!propValue) return;
+	if (!propName || !propValue) return;
         return `${propName}: '${propValue}'`;
       });
-      if (!props[0]) return;
       return `${prefix}'${name}': { ${props.join(', ')} }`;
     });
-    if (!result[0]) return;
     return result.join(', \n');
   };
 

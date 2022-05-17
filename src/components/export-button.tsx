@@ -94,7 +94,7 @@ const ExportButton: React.FC = () => {
         onClick={handleOpen}
       >Export</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} size='xl'>
+      <Modal isOpen={isOpen} onClose={onClose} size='2xl'>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Export your Theme</ModalHeader>

@@ -52,13 +52,15 @@ const ExportButton: React.FC = () => {
     const prefix = new Array(indent + 1).join(' ');
     const result = Object.entries(toFormat).map((style: [name: string, value: any]) => {
       const [name, value] = style;
-      const props = Object.entries(value).map((prop: any) => {
+      const prep = Object.entries(value).filter((prop: any) => prop[1]);
+      const props = prep.map((prop: any) => {
 	const [propName, propValue] = prop;
 	if (!propName || !propValue) return;
         return `${propName}: '${propValue}'`;
       });
+      if (!props.length) return;
       return `${prefix}'${name}': { ${props.join(', ')} }`;
-    });
+    }).filter((style: any) => style);
     return result.join(', \n');
   };
 

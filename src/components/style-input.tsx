@@ -7,6 +7,7 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 import ColorIndicator from './color-indicator';
+import {propRules} from '../constants';
 
 interface Props {
   propName: string;
@@ -16,8 +17,11 @@ interface Props {
 
 const StyleInput: React.FC<Props> = ({ propName, propStyle, callback }) => {
   const [style, setStyle] = useState(propStyle);
-  const isColor = (propName === 'color' || propName === 'backgroundColor');
-  const colorRegex = /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$|^$/i;
+  const isColor = (
+    propName === 'color' ||
+    propName === 'backgroundColor' ||
+    propName === 'caretColor'
+  );
 
   useEffect(() => {
     setStyle(propStyle);
@@ -27,7 +31,7 @@ const StyleInput: React.FC<Props> = ({ propName, propStyle, callback }) => {
     const value = e.target.value;
     setStyle(value);
     
-    if (!colorRegex.test(value)) return;
+    if (!propRules[propName].test(value)) return;
     callback(propName, value);
   };
 

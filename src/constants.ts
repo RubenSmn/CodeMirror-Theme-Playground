@@ -613,3 +613,18 @@ export const standardSyntaxTheme = {
   'inserted': {tag: t.inserted, color: '#86812f'},
   'invalid': {tag: t.invalid, color: '#ffffff'},
 };
+
+export const propRules: {
+  [index: string]: RegExp,
+}= {
+  'color': /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$|^$/i,
+  'backgroundColor': /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$|^$/i,
+  'caretColor': /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$|^$/i,
+  'fontWeight': /^(?:normal|lighter|bold|bolder|[1-9]00|)$/i,
+  'fontStyle': /^(?:normal|italic|oblique|)$/i,
+  'textDecoration': /^(?:underline|overline|line-through|blink|)$/i,
+  'outline': /.*/i,
+  'border': /.*/i,
+  'borderTop': /.*/i,
+  'borderBottom': /.*/i,
+};

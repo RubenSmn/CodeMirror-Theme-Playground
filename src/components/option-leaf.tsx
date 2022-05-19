@@ -2,13 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { tagMap } from '../constants';
 import { useSyntaxTheme } from './playground-provider';
 import {
-  Input,
-  Text,
   ListItem,
-  InputGroup,
-  InputRightElement,
 } from '@chakra-ui/react';
-import ColorIndicator from './color-indicator';
+import StyleInput from './style-input';
 
 interface Props {
   leaf: string;
@@ -42,29 +38,14 @@ const OptionLeaf: React.FC<Props> = (props) => {
     setColorInput(syntaxTheme[leaf].color);
   }, [syntaxTheme]);
 
-  const InputComponent = (
-    <>
-      <Text align='start'>{ leaf }</Text>
-      <InputGroup>
-	<Input
-	  placeholder='#ff3'
-	  variant='flushed'
-	  onChange={(e) => handleChange(e)}
-	  value={colorInput}
-	/>
-        <InputRightElement children={<ColorIndicator color={colorInput} />} />
-      </InputGroup>
-    </>
-  );
-
   return children ? (
     <ListItem pl={2}>
-      { InputComponent }
+      <StyleInput text={leaf} style={colorInput} callback={handleChange} />
       { children } 
     </ListItem>
   ) : (
     <ListItem pl={2}>
-      { InputComponent } 
+      <StyleInput text={leaf} style={colorInput} callback={handleChange} />
     </ListItem>
   );
 };

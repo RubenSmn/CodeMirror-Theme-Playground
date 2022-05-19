@@ -572,11 +572,10 @@ export const standardEditorTheme = {
   '.cm-searchMatch.cm-searchMatch-selected': { backgroundColor: '#6199ff2f' },
   '.cm-activeLine': { backgroundColor: '#C8B593' },
   '.cm-selectionMatch': { backgroundColor: '#aafe661a' },
-  '.cm-gutters': { backgroundColor: '#D7CAB2', color: '#000000', border: '' },
+  '.cm-gutters': { backgroundColor: '#D7CAB2', color: '#000000', border: '2px solid #000000' },
   '.cm-activeLineGutter': { backgroundColor: '#C8B593' },
 };
 
-// commented values are not supported yet
 export const standardSyntaxTheme = {
   'keyword': {tag: t.keyword, color: '#c01b1b'},
   'name': {tag: t.name, color: '#888888'},

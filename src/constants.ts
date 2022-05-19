@@ -628,3 +628,18 @@ export const propRules: {
   'borderTop': /.*/i,
   'borderBottom': /.*/i,
 };
+
+export const propPlaceholder: {
+  [index: string]: string,
+} = {
+  'color': '#ff3',
+  'backgroundColor': '#842f11',
+  'caretColor': '#ffffff',
+  'fontWeight': 'bold',
+  'fontStyle': 'italic',
+  'textDecoration': 'underline',
+  'outline': '',
+  'border': '',
+  'borderTop': '',
+  'borderBottom': '',
+};

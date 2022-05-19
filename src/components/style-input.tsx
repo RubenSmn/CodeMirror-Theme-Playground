@@ -7,7 +7,7 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 import ColorIndicator from './color-indicator';
-import {propRules} from '../constants';
+import {propPlaceholder, propRules} from '../constants';
 
 interface Props {
   propName: string;
@@ -40,7 +40,7 @@ const StyleInput: React.FC<Props> = ({ propName, propStyle, callback }) => {
       <Text align='start'>{ propName }</Text>
       <InputGroup>
 	<Input
-	  placeholder='#ff3'
+	  placeholder={propPlaceholder[propName]}
 	  variant='flushed'
 	  onChange={handleChange}
 	  value={style}

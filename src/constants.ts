@@ -537,12 +537,12 @@ export const editorMap: { [index: string]: {
   'panels top': {
     identifier: '.cm-panels.cm-panels-top',
     description: 'panels at the top of the editor',
-    props: ['backgroundColor', 'borderTop'],
+    props: ['backgroundColor', 'borderBottom'],
   },
   'panels bottom': {
     identifier: '.cm-panels.cm-panels-bottom',
     description: 'panels at the bottom of the editor',
-    props: ['backgroundColor', 'borderBottom'],
+    props: ['backgroundColor', 'borderTop'],
   },
   'search match': {
     identifier: '.cm-searchMatch',
@@ -566,8 +566,8 @@ export const standardEditorTheme = {
   '.cm-content': { caretColor: '#fff6ef' },
   '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection': { backgroundColor: '#EEEEEE' },
   '.cm-panels': { backgroundColor: '#D7CAB2', color: '#879900' },
-  '.cm-panels.cm-panels-top': { borderBottom: 'black' },
-  '.cm-panels.cm-panels-bottom': { borderTop: 'black' },
+  '.cm-panels.cm-panels-top': { borderBottom: '#000000' },
+  '.cm-panels.cm-panels-bottom': { borderTop: '#000000' },
   '.cm-searchMatch': { backgroundColor: '#72a1ff59', outline: '1px solid #457dff' },
   '.cm-searchMatch.cm-searchMatch-selected': { backgroundColor: '#6199ff2f' },
   '.cm-activeLine': { backgroundColor: '#C8B593' },
@@ -612,12 +612,4 @@ export const standardSyntaxTheme = {
   'string': {tag: t.string, color: '#86812f'},
   'inserted': {tag: t.inserted, color: '#86812f'},
   'invalid': {tag: t.invalid, color: '#ffffff'},
-};
-
-export const propRules = {
-  'color': /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$|^$/i,
-  'backgroundColor': /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$|^$/i,
-  'fontWeight': /^(?:normal|lighter|bold|bolder|[1-9]00)$/i,
-  'fontStyle': /^(?:normal|italic|oblique)$/i,
-  'textDecoration': /^(?:underline|overline|line-through|blink)$/i,
 };

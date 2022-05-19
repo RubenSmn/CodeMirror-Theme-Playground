@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import StyleInput from './style-input';
-import { useEditorTheme } from './playground-provider';
+import { useSyntaxTheme } from './playground-provider';
 
 interface Props {
   identifier: string;
@@ -8,20 +8,20 @@ interface Props {
   callback: (prop: string, value: string) => void;
 };
 
-const ThemeOptionProp: React.FC<Props> = (componentProps) => {
+const SyntaxOptionProp: React.FC<Props> = (componentProps) => {
   const { identifier, prop, callback } = componentProps;
   const [colorInput, setColorInput] = useState('');
-  const { editorTheme } = useEditorTheme();
+  const { syntaxTheme } = useSyntaxTheme();
 
   useEffect(() => {
-    if (!editorTheme[identifier]) { setColorInput(''); return; }
-    if (!editorTheme[identifier][prop]) return;
-    setColorInput(editorTheme[identifier][prop]);
-  }, [editorTheme, identifier, prop]);
+    if (!syntaxTheme[identifier]) { setColorInput(''); return; }
+    if (!syntaxTheme[identifier][prop]) return;
+    setColorInput(syntaxTheme[identifier][prop]);
+  }, [syntaxTheme, identifier, prop]);
 
   return (
     <StyleInput propName={prop} propStyle={colorInput} callback={callback} />
   );
 };
 
-export default ThemeOptionProp;
+export default SyntaxOptionProp;

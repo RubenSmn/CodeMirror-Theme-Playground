@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Box,
   Input,
@@ -9,26 +9,42 @@ import {
 import ColorIndicator from './color-indicator';
 
 interface Props {
-  text: string;
-  style: string;
-  callback: (event: any) => void;
+  propName: string;
+  propStyle: string;
+  callback: (prop: string, value: string) => void;
 };
 
-const StyleInput: React.FC<Props> = ({ text, style, callback }) => {
+const StyleInput: React.FC<Props> = ({ propName, propStyle, callback }) => {
+  const [style, setStyle] = useState(propStyle);
+  const isColor = (propName === 'color' || propName === 'backgroundColor');
+  const colorRegex = /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$|^$/i;
+
+  useEffect(() => {
+    setStyle(propStyle);
+  }, [propStyle]);
+
+  const handleChange = (e: any) => {
+    const value = e.target.value;
+    setStyle(value);
+    
+    if (!colorRegex.test(value)) return;
+    callback(propName, value);
+  };
+
   return (
     <Box>
-      <Text align='start'>{ text }</Text>
+      <Text align='start'>{ propName }</Text>
       <InputGroup>
 	<Input
 	  placeholder='#ff3'
 	  variant='flushed'
-	  onChange={callback}
+	  onChange={handleChange}
 	  value={style}
 	/>
-	<InputRightElement children={<ColorIndicator color={style} />} />
+    { isColor && <InputRightElement children={<ColorIndicator color={propStyle} />} /> }
       </InputGroup>
     </Box>
-  )
+  );
 };
 
 export default StyleInput;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { syntaxMap, tagMap } from '../constants';
 import { useSyntaxTheme } from './playground-provider';
 import {
@@ -8,7 +8,7 @@ import {
   ListItem,
 } from '@chakra-ui/react';
 import { InfoOutlineIcon } from '@chakra-ui/icons';
-import StyleInput from './style-input';
+import SyntaxOptionProp from './syntax-option-prop';
 
 interface Props {
   leaf: string;
@@ -19,32 +19,30 @@ const OptionLeaf: React.FC<Props> = (componentProps) => {
   const { leaf, children } = componentProps;
   const tag = tagMap[leaf];
   const { description, props } = syntaxMap[leaf];
-  const { syntaxTheme, setSyntaxTheme } = useSyntaxTheme();
-  const colorRegex = /^#(?:[a-fA-F0-9]{3}$|[a-fA-F0-9]{6}$)|^$/;
-  const [colorInput, setColorInput] = useState('');
+  const { setSyntaxTheme } = useSyntaxTheme();
 
-  const handleChange = (event: any) => {
+  const handleChange = (prop: string, value: string) => {
     // update editor with new style
     // if value is a color
-    const newValue = event.target.value;
-    setColorInput(newValue);
-
-    if (!colorRegex.test(newValue)) return;
     setSyntaxTheme((prevState: any): any => {
       return {
         ...prevState,
-	[leaf]: { tag, color: newValue },
+	[leaf]: {
+	  ...prevState[leaf],
+	  tag,
+	  [prop]: value,
+	},
       };
     });
   };
 
-  useEffect(() => {
-    if (!syntaxTheme[leaf]) { setColorInput(''); return; };
-    setColorInput(syntaxTheme[leaf].color);
-  }, [syntaxTheme]);
-
   const inputItems = props.map((prop: string, idx: number) => (
-    <StyleInput key={`lsi-${idx}`} text={prop} style={colorInput} callback={handleChange} />
+    <SyntaxOptionProp
+      key={`soi-${idx}`}
+      identifier={leaf}
+      prop={prop}
+      callback={handleChange}
+    />
   ));
 
   return (

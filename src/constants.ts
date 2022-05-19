@@ -176,6 +176,324 @@ export const tagMap: { [index: string]: any } = {
   'processingInstruction': t.processingInstruction,
 };
 
+export const syntaxMap: { [index: string]: {
+  description: string,
+  props: string[],
+}} = {
+  'comment': {
+    description: '',
+    props: ['color'],
+  },
+  'lineComment': {
+    description: '',
+    props: ['color'],
+  },
+  'blockComment': {
+    description: '',
+    props: ['color'],
+  },
+  'docComment': {
+    description: '',
+    props: ['color'],
+  },
+  'name': {
+    description: '',
+    props: ['color'],
+  },
+  'variableName': {
+    description: '',
+    props: ['color'],
+  },
+  'typeName': {
+    description: '',
+    props: ['color'],
+  },
+  'tagName': {
+    description: '',
+    props: ['color'],
+  },
+  'propertyName': {
+    description: '',
+    props: ['color'],
+  },
+  'attributeName': {
+    description: '',
+    props: ['color'],
+  },
+  'className': {
+    description: '',
+    props: ['color'],
+  },
+  'labelName': {
+    description: '',
+    props: ['color'],
+  },
+  'namespace': {
+    description: '',
+    props: ['color'],
+  },
+  'macroName': {
+    description: '',
+    props: ['color'],
+  },
+  'literal': {
+    description: '',
+    props: ['color'],
+  },
+  'string': {
+    description: '',
+    props: ['color'],
+  },
+  'docString': {
+    description: '',
+    props: ['color'],
+  },
+  'character': {
+    description: '',
+    props: ['color'],
+  },
+  'attributeValue': {
+    description: '',
+    props: ['color'],
+  },
+  'number': {
+    description: '',
+    props: ['color'],
+  },
+  'integer': {
+    description: '',
+    props: ['color'],
+  },
+  'float': {
+    description: '',
+    props: ['color'],
+  },
+  'bool': {
+    description: '',
+    props: ['color'],
+  },
+  'regexp': {
+    description: '',
+    props: ['color'],
+  },
+  'escape': {
+    description: '',
+    props: ['color'],
+  },
+  'color': {
+    description: '',
+    props: ['color'],
+  },
+  'url': {
+    description: '',
+    props: ['color'],
+  },
+  'keyword': {
+    description: '',
+    props: ['color'],
+  },
+  'self': {
+    description: '',
+    props: ['color'],
+  },
+  'null': {
+    description: '',
+    props: ['color'],
+  },
+  'atom': {
+    description: '',
+    props: ['color'],
+  },
+  'unit': {
+    description: '',
+    props: ['color'],
+  },
+  'modifier': {
+    description: '',
+    props: ['color'],
+  },
+  'operatorKeyword': {
+    description: '',
+    props: ['color'],
+  },
+  'controlKeyword': {
+    description: '',
+    props: ['color'],
+  },
+  'definitionKeyword': {
+    description: '',
+    props: ['color'],
+  },
+  'moduleKeyword': {
+    description: '',
+    props: ['color'],
+  },
+  'operator': {
+    description: '',
+    props: ['color'],
+  },
+  'derefOperator': {
+    description: '',
+    props: ['color'],
+  },
+  'arithmeticOperator': {
+    description: '',
+    props: ['color'],
+  },
+  'logicOperator': {
+    description: '',
+    props: ['color'],
+  },
+  'bitwiseOperator': {
+    description: '',
+    props: ['color'],
+  },
+  'compareOperator': {
+    description: '',
+    props: ['color'],
+  },
+  'updateOperator': {
+    description: '',
+    props: ['color'],
+  },
+  'definitionOperator': {
+    description: '',
+    props: ['color'],
+  },
+  'typeOperator': {
+    description: '',
+    props: ['color'],
+  },
+  'controlOperator': {
+    description: '',
+    props: ['color'],
+  },
+  'punctuation': {
+    description: '',
+    props: ['color'],
+  },
+  'separator': {
+    description: '',
+    props: ['color'],
+  },
+  'bracket': {
+    description: '',
+    props: ['color'],
+  },
+  'angleBracket': {
+    description: '',
+    props: ['color'],
+  },
+  'squareBracket': {
+    description: '',
+    props: ['color'],
+  },
+  'paren': {
+    description: '',
+    props: ['color'],
+  },
+  'brace': {
+    description: '',
+    props: ['color'],
+  },
+  'content': {
+    description: '',
+    props: ['color'],
+  },
+  'heading': {
+    description: '',
+    props: ['color', 'fontWeight'],
+  },
+  'heading1': {
+    description: '',
+    props: ['color'],
+  },
+  'heading2': {
+    description: '',
+    props: ['color'],
+  },
+  'heading3': {
+    description: '',
+    props: ['color'],
+  },
+  'heading4': {
+    description: '',
+    props: ['color'],
+  },
+  'heading5': {
+    description: '',
+    props: ['color'],
+  },
+  'heading6': {
+    description: '',
+    props: ['color'],
+  },
+  'contentSeparator': {
+    description: '',
+    props: ['color'],
+  },
+  'list': {
+    description: '',
+    props: ['color'],
+  },
+  'quote': {
+    description: '',
+    props: ['color'],
+  },
+  'emphasis': {
+    description: '',
+    props: ['color', 'fontStyle'],
+  },
+  'strong': {
+    description: '',
+    props: ['color', 'fontWeight'],
+  },
+  'link': {
+    description: '',
+    props: ['color', 'textDecoration'],
+  },
+  'monospace': {
+    description: '',
+    props: ['color'],
+  },
+  'strikethrough': {
+    description: '',
+    props: ['color', 'textDecoration'],
+  },
+  'inserted': {
+    description: '',
+    props: ['color'],
+  },
+  'deleted': {
+    description: '',
+    props: ['color'],
+  },
+  'changed': {
+    description: '',
+    props: ['color'],
+  },
+  'invalid': {
+    description: '',
+    props: ['color'],
+  },
+  'meta': {
+    description: '',
+    props: ['color'],
+  },
+  'documentMeta': {
+    description: '',
+    props: ['color'],
+  },
+  'annotation': {
+    description: '',
+    props: ['color'],
+  },
+  'processingInstruction': {
+    description: '',
+    props: ['color'],
+  },
+};
+
 export const editorMap: { [index: string]: {
   identifier: string,
   description: string,
@@ -294,4 +612,12 @@ export const standardSyntaxTheme = {
   'string': {tag: t.string, color: '#86812f'},
   'inserted': {tag: t.inserted, color: '#86812f'},
   'invalid': {tag: t.invalid, color: '#ffffff'},
+};
+
+export const propRules = {
+  'color': /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$|^$/i,
+  'backgroundColor': /^#(?:[a-f0-9]{3}|[a-f0-9]{6})$|^$/i,
+  'fontWeight': /^(?:normal|lighter|bold|bolder|[1-9]00)$/i,
+  'fontStyle': /^(?:normal|italic|oblique)$/i,
+  'textDecoration': /^(?:underline|overline|line-through|blink)$/i,
 };

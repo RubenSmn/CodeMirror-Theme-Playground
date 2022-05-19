@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { tagMap } from '../constants';
+import { syntaxMap, tagMap } from '../constants';
 import { useSyntaxTheme } from './playground-provider';
 import {
+  HStack,
+  Text,
+  Tooltip,
   ListItem,
 } from '@chakra-ui/react';
+import { InfoOutlineIcon } from '@chakra-ui/icons';
 import StyleInput from './style-input';
 
 interface Props {
@@ -11,9 +15,10 @@ interface Props {
   children?: React.ReactNode;
 };
 
-const OptionLeaf: React.FC<Props> = (props) => {
-  const { leaf, children } = props;
+const OptionLeaf: React.FC<Props> = (componentProps) => {
+  const { leaf, children } = componentProps;
   const tag = tagMap[leaf];
+  const { description, props } = syntaxMap[leaf];
   const { syntaxTheme, setSyntaxTheme } = useSyntaxTheme();
   const colorRegex = /^#(?:[a-fA-F0-9]{3}$|[a-fA-F0-9]{6}$)|^$/;
   const [colorInput, setColorInput] = useState('');
@@ -38,14 +43,22 @@ const OptionLeaf: React.FC<Props> = (props) => {
     setColorInput(syntaxTheme[leaf].color);
   }, [syntaxTheme]);
 
-  return children ? (
+  const inputItems = props.map((prop: string, idx: number) => (
+    <StyleInput key={`lsi-${idx}`} text={prop} style={colorInput} callback={handleChange} />
+  ));
+
+  return (
     <ListItem pl={2}>
-      <StyleInput text={leaf} style={colorInput} callback={handleChange} />
-      { children } 
-    </ListItem>
-  ) : (
-    <ListItem pl={2}>
-      <StyleInput text={leaf} style={colorInput} callback={handleChange} />
+      <HStack justify='space-between'>
+	<Text fontWeight='bold'>{ leaf }</Text>
+	<Tooltip label={description} placement={'bottom-end'}>
+	  <InfoOutlineIcon />
+	</Tooltip>
+      </HStack>
+      <HStack>
+	{ inputItems }
+      </HStack>
+      { children && children } 
     </ListItem>
   );
 };

@@ -49,9 +49,11 @@ const OptionLeaf: React.FC<Props> = (componentProps) => {
     <ListItem pl={2}>
       <HStack justify='space-between'>
 	<Text fontWeight='bold'>{ leaf }</Text>
-	<Tooltip label={description} placement={'bottom-end'}>
-	  <InfoOutlineIcon />
-	</Tooltip>
+	{ description && (
+	  <Tooltip label={description} placement={'bottom-end'}>
+	    <InfoOutlineIcon />
+	  </Tooltip>
+	)}
       </HStack>
       <HStack>
 	{ inputItems }

@@ -45,9 +45,11 @@ const ThemeOption: React.FC<Props> = ({ optionName }) => {
     <ListItem>
       <HStack justify='space-between'>
 	<Text fontWeight='bold'>{ optionName }</Text>
-	<Tooltip label={description} placement={'bottom-end'}>
-	  <InfoOutlineIcon />
-	</Tooltip>
+	  { description && (
+	    <Tooltip label={description} placement={'bottom-end'}>
+	      <InfoOutlineIcon />
+	    </Tooltip>
+	  )}
       </HStack>
       <HStack>
 	{ inputItems }

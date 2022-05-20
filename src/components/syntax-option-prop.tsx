@@ -15,7 +15,7 @@ const SyntaxOptionProp: React.FC<Props> = (componentProps) => {
 
   useEffect(() => {
     if (!syntaxTheme[identifier]) { setColorInput(''); return; }
-    if (!syntaxTheme[identifier][prop]) return;
+    if (!syntaxTheme[identifier][prop]) { setColorInput(''); return; }
     setColorInput(syntaxTheme[identifier][prop]);
   }, [syntaxTheme, identifier, prop]);
 

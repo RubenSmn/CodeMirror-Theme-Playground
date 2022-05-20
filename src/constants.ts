@@ -181,71 +181,71 @@ export const syntaxMap: { [index: string]: {
   props: string[],
 }} = {
   'comment': {
-    description: '',
+    description: 'a comment',
     props: ['color'],
   },
   'lineComment': {
-    description: '',
+    description: 'a line comment',
     props: ['color'],
   },
   'blockComment': {
-    description: '',
+    description: 'a block comment',
     props: ['color'],
   },
   'docComment': {
-    description: '',
+    description: 'a document comment',
     props: ['color'],
   },
   'name': {
-    description: '',
+    description: 'any kind of identifier',
     props: ['color'],
   },
   'variableName': {
-    description: '',
+    description: 'name of a variable',
     props: ['color'],
   },
   'typeName': {
-    description: '',
+    description: 'type of a variable',
     props: ['color'],
   },
   'tagName': {
-    description: '',
+    description: 'example: html, when defining the html tag in a css file',
     props: ['color'],
   },
   'propertyName': {
-    description: '',
+    description: 'a property/field of a variable',
     props: ['color'],
   },
   'attributeName': {
-    description: '',
+    description: 'attribute of a property',
     props: ['color'],
   },
   'className': {
-    description: '',
+    description: 'name of a class',
     props: ['color'],
   },
   'labelName': {
-    description: '',
+    description: 'a label name, exapmle: in markdown the syntax type in a codeblock',
     props: ['color'],
   },
   'namespace': {
-    description: '',
+    description: 'a namespace',
     props: ['color'],
   },
   'macroName': {
-    description: '',
+    description: 'name of a macro',
     props: ['color'],
   },
   'literal': {
-    description: '',
+    description: 'a literal',
     props: ['color'],
   },
   'string': {
-    description: '',
+    description: 'a string',
     props: ['color'],
   },
   'docString': {
-    description: '',
+    description: 'a doc string',
     props: ['color'],
   },
   'character': {
@@ -257,23 +257,23 @@ export const syntaxMap: { [index: string]: {
     props: ['color'],
   },
   'number': {
-    description: '',
+    description: 'a number',
     props: ['color'],
   },
   'integer': {
-    description: '',
+    description: 'an integer',
     props: ['color'],
   },
   'float': {
-    description: '',
+    description: 'an float',
     props: ['color'],
   },
   'bool': {
-    description: '',
+    description: 'an boolean',
     props: ['color'],
   },
   'regexp': {
-    description: '',
+    description: 'a regular expression',
     props: ['color'],
   },
   'escape': {
@@ -281,15 +281,15 @@ export const syntaxMap: { [index: string]: {
     props: ['color'],
   },
   'color': {
-    description: '',
+    description: 'a color hex value',
     props: ['color'],
   },
   'url': {
-    description: '',
+    description: 'an url',
     props: ['color'],
   },
   'keyword': {
-    description: '',
+    description: 'an keyword, predefined by a language: function, var, etc..',
     props: ['color'],
   },
   'self': {
@@ -297,19 +297,19 @@ export const syntaxMap: { [index: string]: {
     props: ['color'],
   },
   'null': {
-    description: '',
+    description: 'null',
     props: ['color'],
   },
   'atom': {
-    description: '',
+    description: 'used in css',
     props: ['color'],
   },
   'unit': {
-    description: '',
+    description: 'unit in css: px, em, etc..',
     props: ['color'],
   },
   'modifier': {
-    description: '',
+    description: 'keyword for behaviour of a function, java: public, static, etc..',
     props: ['color'],
   },
   'operatorKeyword': {
@@ -317,23 +317,23 @@ export const syntaxMap: { [index: string]: {
     props: ['color'],
   },
   'controlKeyword': {
-    description: '',
+    description: 'keyword that controls if something happens: if, else, while, etc..',
     props: ['color'],
   },
   'definitionKeyword': {
-    description: '',
+    description: 'predefined keyword: class, def, function, etc..',
     props: ['color'],
   },
   'moduleKeyword': {
-    description: '',
+    description: 'import keywords',
     props: ['color'],
   },
   'operator': {
-    description: '',
+    description: 'operator',
     props: ['color'],
   },
   'derefOperator': {
-    description: '',
+    description: 'an operator that defines something',
     props: ['color'],
   },
   'arithmeticOperator': {
@@ -341,123 +341,123 @@ export const syntaxMap: { [index: string]: {
     props: ['color'],
   },
   'logicOperator': {
-    description: '',
+    description: 'logical operator',
     props: ['color'],
   },
   'bitwiseOperator': {
-    description: '',
+    description: 'bitwise operator',
     props: ['color'],
   },
   'compareOperator': {
-    description: '',
+    description: 'comparison operator',
     props: ['color'],
   },
   'updateOperator': {
-    description: '',
+    description: 'update operator',
     props: ['color'],
   },
   'definitionOperator': {
-    description: '',
+    description: 'operator that assign something',
     props: ['color'],
   },
   'typeOperator': {
-    description: '',
+    description: 'type-related operator',
     props: ['color'],
   },
   'controlOperator': {
-    description: '',
+    description: 'control operator',
     props: ['color'],
   },
   'punctuation': {
-    description: '',
+    description: 'punctuation',
     props: ['color'],
   },
   'separator': {
-    description: '',
+    description: 'a separator: such as a comma(,)',
     props: ['color'],
   },
   'bracket': {
-    description: '',
+    description: 'a bracket',
     props: ['color'],
   },
   'angleBracket': {
-    description: '',
+    description: 'usually < and >',
     props: ['color'],
   },
   'squareBracket': {
-    description: '',
+    description: 'usually [ and ]',
     props: ['color'],
   },
   'paren': {
-    description: '',
+    description: 'usually ( and )',
     props: ['color'],
   },
   'brace': {
-    description: '',
+    description: 'usually { and }',
     props: ['color'],
   },
   'content': {
-    description: '',
+    description: 'content, example: text in a markdown file',
     props: ['color'],
   },
   'heading': {
-    description: '',
+    description: 'a heading',
     props: ['color', 'fontWeight'],
   },
   'heading1': {
-    description: '',
+    description: 'heading 1',
     props: ['color'],
   },
   'heading2': {
-    description: '',
+    description: 'heading 2',
     props: ['color'],
   },
   'heading3': {
-    description: '',
+    description: 'heading 3',
     props: ['color'],
   },
   'heading4': {
-    description: '',
+    description: 'heading 4',
     props: ['color'],
   },
   'heading5': {
-    description: '',
+    description: 'heading 5',
     props: ['color'],
   },
   'heading6': {
-    description: '',
+    description: 'heading 6',
     props: ['color'],
   },
   'contentSeparator': {
-    description: '',
+    description: 'in markdown: ---',
     props: ['color'],
   },
   'list': {
-    description: '',
+    description: 'a list, does not work with ordered list',
     props: ['color'],
   },
   'quote': {
-    description: '',
+    description: 'a quote',
     props: ['color'],
   },
   'emphasis': {
-    description: '',
+    description: 'emphasis',
     props: ['color', 'fontStyle'],
   },
   'strong': {
-    description: '',
+    description: 'strong',
     props: ['color', 'fontWeight'],
   },
   'link': {
-    description: '',
+    description: 'a link',
     props: ['color', 'textDecoration'],
   },
   'monospace': {
-    description: '',
+    description: 'monospaced text, in between ``',
     props: ['color'],
   },
   'strikethrough': {
-    description: '',
+    description: 'strikethrough text',
     props: ['color', 'textDecoration'],
   },
   'inserted': {
@@ -477,19 +477,19 @@ export const syntaxMap: { [index: string]: {
     props: ['color'],
   },
   'meta': {
-    description: '',
+    description: 'meta',
     props: ['color'],
   },
   'documentMeta': {
-    description: '',
+    description: 'documenet meta',
     props: ['color'],
   },
   'annotation': {
-    description: '',
+    description: 'annotation',
     props: ['color'],
   },
   'processingInstruction': {
-    description: '',
+    description: 'example: in c++, #incldue',
     props: ['color'],
   },
 };

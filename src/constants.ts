@@ -512,7 +512,7 @@ export const editorMap: { [index: string]: {
   'gutters': {
     identifier: '.cm-gutters',
     description: 'line number bar',
-    props: ['backgroundColor', 'color', 'border'],
+    props: ['backgroundColor', 'color', 'borderRight'],
   },
   'selection': {
     identifier: '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection',
@@ -572,7 +572,7 @@ export const standardEditorTheme = {
   '.cm-searchMatch.cm-searchMatch-selected': { backgroundColor: '#6199ff2f' },
   '.cm-activeLine': { backgroundColor: '#C8B593' },
   '.cm-selectionMatch': { backgroundColor: '#aafe661a' },
-  '.cm-gutters': { backgroundColor: '#D7CAB2', color: '#000000', border: '2px solid #000000' },
+  '.cm-gutters': { backgroundColor: '#D7CAB2', color: '#000000', borderRight: '1px solid #000000' },
   '.cm-activeLineGutter': { backgroundColor: '#C8B593' },
 };
 
@@ -623,7 +623,7 @@ export const propRules: {
   'fontStyle': /^(?:normal|italic|oblique|)$/i,
   'textDecoration': /^(?:underline|overline|line-through|blink|)$/i,
   'outline': /.*/i,
-  'border': /.*/i,
+  'borderRight': /.*/i,
   'borderTop': /.*/i,
   'borderBottom': /.*/i,
 };
@@ -638,7 +638,7 @@ export const propPlaceholder: {
   'fontStyle': 'italic',
   'textDecoration': 'underline',
   'outline': '',
-  'border': '',
+  'borderRight': '',
   'borderTop': '',
   'borderBottom': '',
 };

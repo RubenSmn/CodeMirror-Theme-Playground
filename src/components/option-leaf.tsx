@@ -1,70 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import { tagMap } from '../constants';
+import React from 'react';
+import { syntaxMap, tagMap } from '../constants';
 import { useSyntaxTheme } from './playground-provider';
 import {
-  Input,
+  HStack,
   Text,
+  Tooltip,
   ListItem,
-  InputGroup,
-  InputRightElement,
 } from '@chakra-ui/react';
-import ColorIndicator from './color-indicator';
+import { InfoOutlineIcon } from '@chakra-ui/icons';
+import SyntaxOptionProp from './syntax-option-prop';
 
 interface Props {
   leaf: string;
   children?: React.ReactNode;
 };
 
-const OptionLeaf: React.FC<Props> = (props) => {
-  const { leaf, children } = props;
+const OptionLeaf: React.FC<Props> = (componentProps) => {
+  const { leaf, children } = componentProps;
   const tag = tagMap[leaf];
-  const { syntaxTheme, setSyntaxTheme } = useSyntaxTheme();
-  const colorRegex = /^#(?:[a-fA-F0-9]{3}|[a-fA-F0-9]{6}$)|^$/;
-  const [colorInput, setColorInput] = useState('');
+  const { description, props } = syntaxMap[leaf];
+  const { setSyntaxTheme } = useSyntaxTheme();
 
-  const handleChange = (event: any) => {
+  const handleChange = (prop: string, value: string) => {
     // update editor with new style
     // if value is a color
-    const newValue = event.target.value;
-    setColorInput(newValue);
-
-    if (!colorRegex.test(newValue)) return;
     setSyntaxTheme((prevState: any): any => {
       return {
         ...prevState,
-	[leaf]: { tag, color: newValue },
+	[leaf]: {
+	  ...prevState[leaf],
+	  tag,
+	  [prop]: value,
+	},
       };
     });
   };
 
-  useEffect(() => {
-    if (!syntaxTheme[leaf]) { setColorInput(''); return; };
-    setColorInput(syntaxTheme[leaf].color);
-  }, [syntaxTheme]);
+  const inputItems = props.map((prop: string, idx: number) => (
+    <SyntaxOptionProp
+      key={`soi-${idx}`}
+      identifier={leaf}
+      prop={prop}
+      callback={handleChange}
+    />
+  ));
 
-  const InputComponent = (
-    <>
-      <Text align='start'>{ leaf }</Text>
-      <InputGroup>
-	<Input
-	  placeholder='#ff3'
-	  variant='flushed'
-	  onChange={(e) => handleChange(e)}
-	  value={colorInput}
-	/>
-        <InputRightElement children={<ColorIndicator color={colorInput} />} />
-      </InputGroup>
-    </>
-  );
-
-  return children ? (
+  return (
     <ListItem pl={2}>
-      { InputComponent }
-      { children } 
-    </ListItem>
-  ) : (
-    <ListItem pl={2}>
-      { InputComponent } 
+      <HStack justify='space-between'>
+	<Text fontWeight='bold'>{ leaf }</Text>
+	<Tooltip label={description} placement={'bottom-end'}>
+	  <InfoOutlineIcon />
+	</Tooltip>
+      </HStack>
+      <HStack>
+	{ inputItems }
+      </HStack>
+      { children && children } 
     </ListItem>
   );
 };

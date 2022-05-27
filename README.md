@@ -7,7 +7,7 @@ CodeMirror Theme Playground is a simple React based app to make it more accessib
 To install all the dependencies run:
 
 ```sh
-npm  install
+npm install
 ```
 
 After all dependencies are installed, you can run:

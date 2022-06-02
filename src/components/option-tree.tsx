@@ -36,7 +36,7 @@ const OptionTree: React.FC<Props> = (props) => {
       <TabList>
 	{ Object.keys(tree).map((leaf: string) => <Tab key={`tlt-${leaf}`}>{ leaf }</Tab>) }
       </TabList>
-      <TabPanels>
+      <TabPanels maxH={'79vh'} overflowY='scroll'>
 	{ leafs.map((leaf: any, idx: number) => (
 	  <TabPanel key={`tlp-${idx}`} p={0}>
 	    <List>

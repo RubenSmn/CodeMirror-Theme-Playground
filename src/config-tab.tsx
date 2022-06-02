@@ -31,7 +31,7 @@ const ConfigTab: React.FC = () => {
           <Tab>Editor</Tab>
 	</TabList>
         <TabPanels>
-          <TabPanel>
+          <TabPanel pr={0}>
 	    <OptionTree tree={tagTree} />
           </TabPanel>
           <TabPanel maxH={'80vh'} overflowY='scroll'>

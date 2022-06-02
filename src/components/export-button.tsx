@@ -29,38 +29,49 @@ const ExportButton: React.FC = () => {
 
   const formatSyntaxToJs= (toFormat: any, indent: number = 2) => {
     const prefix = new Array(indent + 1).join(' ');
-    const prep: { [color: string]: string[] } = Object.entries(toFormat).reduce((acc: any, t: [name: string, value: any]) => {
-      const [name, value] = t;
-      // if the value has no color 'continue'
-      if (!value.color) return acc;
-      // if color does not exist add new array
-      if (!acc[value.color]) return { ...acc, [value.color]: [name]};
-      // if color exists add push name
-      return { ...acc, [value.color]: [...acc[value.color], name]};
-    }, {});
-    const result = Object.entries(prep).map((m: [color: string, tags: string[]]) => {
-      const [color, tags] = m;
-      if(!color) return;
-      const resTags = tags.map((t: string) => `t.${t}`)
-      return `${prefix}{ tag: [${resTags.join(', ')}], color: '${color}' }`;
-    });
-    if (!result[0]) return;
+
+    const prep: { [prop: string]: string[] } = Object.entries(toFormat)
+      .reduce((acc: any, t: [name: string, value: any]) => {
+	const [name, value] = t;
+	Object.entries(value)
+	  .map((prop: [name: string, value: any]) => {
+	    const [propName, propValue] = prop;
+	    if (propName === 'tag') return null;
+	    const finalProp = `${propName}: '${propValue}'`;
+	    if (!acc[finalProp]) {
+	      acc = { ...acc, [finalProp]: [name] };
+	      return null;
+	    }
+	    acc = { ...acc, [finalProp]: [...acc[finalProp], name] };
+	    return null;
+	  });
+	return acc;
+      }, {});
+
+    const result = Object.entries(prep)
+      .map((m: [color: string, tags: string[]]) => {
+	const [prop, tags] = m;
+	const resTags = tags.map((t: string) => `t.${t}`)
+	return `${prefix}{ tag: [${resTags.join(', ')}], ${prop} }`;
+      });
+
     return result.join(', \n');
   };
  
   const formatThemeToJs = (toFormat: any, indent: number = 2) => {
     const prefix = new Array(indent + 1).join(' ');
+
     const result = Object.entries(toFormat).map((style: [name: string, value: any]) => {
       const [name, value] = style;
-      const prep = Object.entries(value).filter((prop: any) => prop[1]);
-      const props = prep.map((prop: any) => {
+      const props = Object.entries(value).map((prop: any) => {
 	const [propName, propValue] = prop;
-	if (!propName || !propValue) return;
+	if (!propName || !propValue) return null;
         return `${propName}: '${propValue}'`;
       });
-      if (!props.length) return;
+      if (!props.length) return null;
       return `${prefix}'${name}': { ${props.join(', ')} }`;
-    }).filter((style: any) => style);
+    });
+
     return result.join(', \n');
   };
 
